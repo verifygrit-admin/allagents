@@ -56,6 +56,8 @@
   .icon-morty   { border: 2px solid #7a1a1a; background-image: url('http://localhost:5173/universal_assets/citizens/morty_walk.png'); }
   .icon-dexter  { border: 2px solid #1a5a7a; background-image: url('http://localhost:5173/universal_assets/citizens/dexter_walk.png'); }
   .icon-rio     { border: 2px solid #6a3d7a; background-image: url('http://localhost:5173/universal_assets/citizens/rio_walk.png'); }
+  .icon-patch   { border: 2px solid #7a5a00; background-image: url('http://localhost:5173/universal_assets/citizens/nova_walk.png'); }
+  .header-patch { background: #1a1200; }
 
   /* ── Card header tints ── */
   .header-nova    { background: #0a1f0a; }
@@ -120,6 +122,9 @@
   </div>
   <div class="tab" data-panel="monitor"  data-scope="project" onclick="showTab('monitor',this)">
     <span class="tab-dot project"></span>Platform Monitor
+  </div>
+  <div class="tab" data-panel="gas"  data-scope="project" onclick="showTab('gas',this)">
+    <span class="tab-dot project"></span>GAS Engineer
   </div>
 </div>
 
@@ -450,6 +455,89 @@ WHAT IT DOES NOT DO:
       </div>
     </div>
   </div><!-- /panel-monitor -->
+
+
+  <!-- ══════════════ GAS ENGINEER (PROJECT: CFB RECRUIT HUB) ══════════════ -->
+  <div class="panel" id="panel-gas" data-scope="project">
+    <div class="agent-card">
+      <div class="agent-card-header header-patch">
+        <div class="agent-icon icon-patch"></div>
+        <div>
+          <div class="agent-name">Sprite: Patch &nbsp;<span style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:2px;color:#7a5a00;vertical-align:middle">·</span>&nbsp; Role: GAS Engineer</div>
+          <div class="agent-tagline">Code.gs repair · schema validation · gws CLI integration · migration prep</div>
+        </div>
+        <div class="agent-scope-badge project">CFB Recruit Hub</div>
+        <div class="agent-meta">
+          <div>Sprite: patch</div>
+          <div>Model: sonnet</div>
+          <div>Memory: project</div>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#b88a00">Trigger Phrases</div>
+        <div class="triggers">
+          <div class="trigger">fix the cols 24-26 bug in Code.gs</div>
+          <div class="trigger">run the GAS engineer on [task]</div>
+          <div class="trigger">fix the email change flow</div>
+          <div class="trigger">validate the Recruits tab schema</div>
+          <div class="trigger">document the sheet schema for migration</div>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#b88a00">When to Trigger</div>
+        <ul class="when-list">
+          <li><div class="when-dot" style="background:#7a5a00"></div>Any Code.gs function needs to be written, fixed, or reviewed</li>
+          <li><div class="when-dot" style="background:#7a5a00"></div>Google Sheets schema needs to be inspected or validated via gws CLI</li>
+          <li><div class="when-dot" style="background:#7a5a00"></div>Auth flow (saveRecruit, updateRecruit, signIn, email change) behaves unexpectedly</li>
+          <li><div class="when-dot" style="background:#7a5a00"></div>Preparing schema documentation for a Supabase/Firebase migration</li>
+        </ul>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#b88a00">GWS CLI Commands</div>
+        <div class="cmd-block">
+          <div class="cmd-label">Recruits headers</div>
+          <div class="cmd-code" id="gas-r1">gws sheets +read --spreadsheet 1Pc4LOnD1fhQz-9pI_CUEDaAMDfTkUXcCRTVDfoDWvqo --range "Recruits!A1:AC1" --format table</div>
+          <button class="copy-btn" onclick="copy('gas-r1',this)">Copy</button>
+        </div>
+        <div class="cmd-block">
+          <div class="cmd-label">Auth headers</div>
+          <div class="cmd-code" id="gas-r2">gws sheets +read --spreadsheet 1Pc4LOnD1fhQz-9pI_CUEDaAMDfTkUXcCRTVDfoDWvqo --range "Auth!A1:O1" --format table</div>
+          <button class="copy-btn" onclick="copy('gas-r2',this)">Copy</button>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#b88a00">Active Task Queue</div>
+        <div class="output-block">v1.1.1  CRITICAL — cols 24-26 collision (move auth fields to cols 27-29)
+v1.1.2  Orphaned profiles on GPA-fail / no-top50 paths
+v1.1.3  Email change: pick magic link OR 6-digit, delete the other
+v1.1.4  Remove or build 6-digit verify modal
+
+Phase 2  Freeze ?action= params as React Router is added
+Phase 3  PostgreSQL DDL + REST map from live gws reads → Supabase prep</div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#b88a00">System Prompt Summary</div>
+        <div class="prompt-block">You are Patch — a Google Apps Script engineer embedded in cfb-recruit-hub.
+You own Code.gs, the Google Sheets data layer, and all backend auth/data flows.
+You work precisely: read before writing, patch surgically, validate with gws CLI
+before and after changes.
+
+Core rules:
+— Always read Code.gs before proposing any edit
+— Use gws CLI to inspect live sheet state before schema-related changes
+— Make targeted function-level patches — never rewrite unrelated functions
+— After any Code.gs change: remind user to redeploy in Apps Script editor
+— Never change existing ?action= parameter names
+— Flag any Recruits/Auth schema change for gws CLI validation</div>
+      </div>
+
+    </div>
+  </div><!-- /panel-gas -->
 
 </div><!-- /content -->
 
