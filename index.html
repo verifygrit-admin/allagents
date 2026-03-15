@@ -357,7 +357,7 @@ CLASSIFICATION:
         <div class="agent-icon icon-nova"></div>
         <div>
           <div class="agent-name">Sprite: Nova &nbsp;<span style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:2px;color:#2a5a1a;vertical-align:middle">·</span>&nbsp; Role: Claude (Primary)</div>
-          <div class="agent-tagline">Main conversational agent — orchestrates all other agents, handles general tasks across all projects</div>
+          <div class="agent-tagline">Primary AI — full-stack capability across all repos, operates with collaborative deference within team structure</div>
         </div>
         <div class="agent-scope-badge global">Global</div>
         <div class="agent-meta">
@@ -370,26 +370,32 @@ CLASSIFICATION:
       <div class="card-section">
         <div class="sec-label" style="color:#4a9a2a">What Nova Does</div>
         <ul class="when-list">
-          <li><div class="when-dot" style="background:#2a5a1a"></div>Primary interface for all tasks — code, planning, writing, debugging</li>
-          <li><div class="when-dot" style="background:#2a5a1a"></div>Orchestrates specialized agents (Morty, Dexter, Rio, Patch) by launching them as subagents</li>
-          <li><div class="when-dot" style="background:#2a5a1a"></div>Reads memory across sessions via the auto-memory system</li>
-          <li><div class="when-dot" style="background:#2a5a1a"></div>Handles tasks that don't belong to a specialized agent</li>
-          <li><div class="when-dot" style="background:#2a5a1a"></div>Appears in the ocean lab world when any Claude Code session is active</li>
+          <li><div class="when-dot" style="background:#2a5a1a"></div>Primary interface for all tasks — code, planning, writing, debugging across all repos</li>
+          <li><div class="when-dot" style="background:#2a5a1a"></div>Executes builds within Scout-approved scope; issues [PUSH CHECK] before any deploy sequence</li>
+          <li><div class="when-dot" style="background:#2a5a1a"></div>Pressure-tests Sage's strategic recommendations for technical validity before they move downstream</li>
+          <li><div class="when-dot" style="background:#2a5a1a"></div>Defers to specialist agents at jurisdiction boundaries — identifies and flags, does not override</li>
+          <li><div class="when-dot" style="background:#2a5a1a"></div>Handles tasks that don't belong to a specialist; defaults to Scout when scope is unclear</li>
         </ul>
       </div>
 
       <div class="card-section">
-        <div class="sec-label" style="color:#4a9a2a">How to Invoke Specialized Agents</div>
+        <div class="sec-label" style="color:#4a9a2a">Deference Triggers — Nova hands off to:</div>
+        <div class="output-block">Code.gs / Apps Script work    → Patch
+Architecture audit             → Morty
+Platform health check          → Dexter
+Version tagging                → Rio
+Strategic horizon assessment   → Sage
+Source of truth / sequencing   → Scout
+Session documentation          → Scribe
+Document retrieval             → Vault</div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#4a9a2a">How to Invoke Nova's Specialists</div>
         <div class="output-block">run Morty       → cfb-recruit-hub-auditor  (architecture audit)
 run Dexter      → cfb-recruit-hub-monitor  (platform health check)
 run Rio         → version-manager          (semver tag + push)
-run Patch       → gas-engineer             (Code.gs repair + schema validation)
-
-Also works:
-"have Morty audit the codebase"
-"ask Patch to fix the cols 24-26 bug"
-"let Rio cut a version for cfb-recruit-hub"
-"have Dexter check platform health after the deploy"</div>
+run Patch       → gas-engineer             (Code.gs repair + schema validation)</div>
       </div>
 
       <div class="card-section">
