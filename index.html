@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Agents — Claude Code</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600&family=Barlow:wght@400;500&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #060a07; color: #c8f5a0; font-family: 'Barlow', sans-serif; min-height: 100vh; }
+
+  .header { background: #0a2e14; border-bottom: 1px solid #2a3d2d; padding: 18px 32px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+  .header-left h1 { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 2px; color: #6ed430; }
+  .header-left p { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; color: #6b8c72; letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
+  .header-badges { display: flex; gap: 8px; }
+  .hbadge { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 12px; border-radius: 20px; }
+  .hbadge.global  { background: #f5a623; color: #1a0e00; }
+  .hbadge.project { background: #6ed430; color: #060a07; }
+
+  /* ── Section headers ── */
+  .section-group { padding: 0 32px; }
+  .group-header { display: flex; align-items: center; gap: 12px; padding: 18px 0 0; }
+  .group-label { font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; padding: 4px 14px; border-radius: 20px; }
+  .group-label.global  { background: #f5a623; color: #1a0e00; }
+  .group-label.project { background: #1a3d1a; color: #6ed430; border: 1px solid #3b6d11; }
+  .group-divider { flex: 1; height: 1px; background: #1a2e1d; }
+  .group-project-name { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; color: #4a6b4d; letter-spacing: 1px; text-transform: uppercase; }
+
+  /* ── Tabs ── */
+  .tabs { display: flex; gap: 0; border-bottom: 1px solid #2a3d2d; padding: 0 32px; flex-wrap: wrap; }
+  .tab { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #6b8c72; padding: 12px 20px; cursor: pointer; border-bottom: 2px solid transparent; transition: color 0.15s, border-color 0.15s; user-select: none; display: flex; align-items: center; gap: 7px; }
+  .tab:hover { color: #c8f5a0; }
+  .tab.active { border-bottom-width: 2px; }
+  .tab-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .tab-dot.global  { background: #f5a623; }
+  .tab-dot.project { background: #6ed430; }
+
+  /* ── Content ── */
+  .content { max-width: 920px; margin: 0 auto; padding: 28px 32px; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── Agent card ── */
+  .agent-card { background: #0e1510; border: 1px solid #2a3d2d; border-radius: 8px; overflow: hidden; }
+  .agent-card-header { padding: 16px 20px; display: flex; align-items: center; gap: 14px; border-bottom: 1px solid #2a3d2d; }
+  .agent-scope-badge { font-family: 'Barlow Condensed', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 2px 8px; border-radius: 20px; margin-left: auto; flex-shrink: 0; }
+  .agent-scope-badge.global  { background: #f5a623; color: #1a0e00; }
+  .agent-scope-badge.project { background: #1a3d1a; color: #6ed430; border: 1px solid #3b6d11; }
+  .agent-name { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: #c8f5a0; }
+  .agent-tagline { font-size: 12px; color: #6b8c72; margin-top: 2px; }
+  .agent-meta { text-align: right; font-size: 11px; color: #4a6b4d; font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.5px; line-height: 1.7; }
+
+  /* ── Sprite icon ── */
+  .agent-icon { width: 48px; height: 48px; border-radius: 50%; overflow: hidden; flex-shrink: 0; background-size: 512px 512px; background-position: -45px -9px; background-repeat: no-repeat; }
+  .icon-nova    { border: 2px solid #3b6d11; background-image: url('../../chris-miniverse/public/universal_assets/citizens/nova_walk.png'); }
+  .icon-morty   { border: 2px solid #7a1a1a; background-image: url('../../chris-miniverse/public/universal_assets/citizens/morty_walk.png'); }
+  .icon-dexter  { border: 2px solid #1a5a7a; background-image: url('../../chris-miniverse/public/universal_assets/citizens/dexter_walk.png'); }
+  .icon-rio     { border: 2px solid #6a3d7a; background-image: url('../../chris-miniverse/public/universal_assets/citizens/rio_walk.png'); }
+
+  /* ── Card header tints ── */
+  .header-nova    { background: #0a1f0a; }
+  .header-morty   { background: #1f0808; }
+  .header-dexter  { background: #08101f; }
+  .header-rio     { background: #120820; }
+
+  /* ── Sections ── */
+  .card-section { padding: 18px 20px; border-bottom: 1px solid #1a2e1d; }
+  .card-section:last-child { border-bottom: none; }
+  .sec-label { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+
+  /* ── Triggers ── */
+  .triggers { display: flex; flex-direction: column; gap: 5px; }
+  .trigger { background: #060a07; border: 1px solid #1a2e1d; border-radius: 4px; padding: 7px 12px; font-size: 13px; color: #9fcf85; font-style: italic; }
+  .trigger::before { content: '"'; color: #3b6d11; }
+  .trigger::after  { content: '"'; color: #3b6d11; }
+
+  /* ── When list ── */
+  .when-list { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+  .when-list li { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: #9fcf85; line-height: 1.5; }
+  .when-dot { width: 6px; height: 6px; border-radius: 50%; margin-top: 6px; flex-shrink: 0; }
+
+  /* ── Curl commands ── */
+  .cmd-block { background: #060a07; border: 1px solid #1a2e1d; border-radius: 4px; padding: 10px 12px; margin-bottom: 8px; }
+  .cmd-block:last-child { margin-bottom: 0; }
+  .cmd-label { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #4a6b4d; margin-bottom: 5px; }
+  .cmd-code { font-family: 'Courier New', monospace; font-size: 11px; color: #6ed430; white-space: pre-wrap; word-break: break-all; line-height: 1.6; }
+  .copy-btn { display: inline-block; margin-top: 5px; background: none; border: 1px solid #1a2e1d; border-radius: 3px; color: #4a6b4d; font-family: 'Barlow Condensed', sans-serif; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; padding: 2px 8px; cursor: pointer; transition: color 0.15s, border-color 0.15s; }
+  .copy-btn:hover { color: #6ed430; border-color: #3b6d11; }
+
+  /* ── Output / system prompt block ── */
+  .prompt-block { background: #060a07; border: 1px solid #1a2e1d; border-radius: 4px; padding: 14px; font-family: 'Courier New', monospace; font-size: 11px; color: #7aab7a; line-height: 1.7; white-space: pre-wrap; max-height: 380px; overflow-y: auto; }
+  .prompt-block::-webkit-scrollbar { width: 5px; }
+  .prompt-block::-webkit-scrollbar-track { background: #060a07; }
+  .prompt-block::-webkit-scrollbar-thumb { background: #1a2e1d; border-radius: 3px; }
+
+  /* ── Output format block ── */
+  .output-block { background: #060a07; border: 1px solid #1a2e1d; border-radius: 4px; padding: 12px 14px; font-family: 'Courier New', monospace; font-size: 11px; color: #9fcf85; line-height: 1.8; white-space: pre-wrap; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <h1>All Agents — Claude Code</h1>
+    <p>Global &amp; Project-Specific Agent Reference</p>
+  </div>
+  <div class="header-badges">
+    <div class="hbadge global">● Global</div>
+    <div class="hbadge project">● Project</div>
+  </div>
+</div>
+
+<!-- ── Tab bar ── -->
+<div class="tabs" id="tab-bar">
+  <div class="tab" data-panel="version"  data-scope="global"  onclick="showTab('version',this)">
+    <span class="tab-dot global"></span>Version Manager
+  </div>
+  <div class="tab" data-panel="auditor"  data-scope="project" onclick="showTab('auditor',this)">
+    <span class="tab-dot project"></span>Arch. Auditor
+  </div>
+  <div class="tab" data-panel="monitor"  data-scope="project" onclick="showTab('monitor',this)">
+    <span class="tab-dot project"></span>Platform Monitor
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- ══════════════ VERSION MANAGER (GLOBAL) ══════════════ -->
+  <div class="panel" id="panel-version" data-scope="global">
+    <div class="agent-card">
+      <div class="agent-card-header header-rio">
+        <div class="agent-icon icon-rio"></div>
+        <div>
+          <div class="agent-name">version-manager</div>
+          <div class="agent-tagline">Reads git log, evaluates change severity, proposes semver bump, tags + pushes on confirm</div>
+        </div>
+        <div class="agent-scope-badge global">Global</div>
+        <div class="agent-meta">
+          <div>Sprite: rio</div>
+          <div>Model: sonnet</div>
+          <div>Memory: project</div>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#9a6aaa">Trigger Phrases</div>
+        <div class="triggers">
+          <div class="trigger">run the version manager on cfb-recruit-hub</div>
+          <div class="trigger">version the announce repo</div>
+          <div class="trigger">cut a release for CFB-mapping</div>
+          <div class="trigger">what version are we on for [repo]?</div>
+          <div class="trigger">ready to tag a new version</div>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#9a6aaa">When to Trigger</div>
+        <ul class="when-list">
+          <li><div class="when-dot" style="background:#6a3d7a"></div>After completing a working milestone on any repo</li>
+          <li><div class="when-dot" style="background:#6a3d7a"></div>Before a demo, launch, or sharing with a client</li>
+          <li><div class="when-dot" style="background:#6a3d7a"></div>When you want a clean git tag in the history</li>
+          <li><div class="when-dot" style="background:#6a3d7a"></div>After merging a significant PR or feature branch</li>
+        </ul>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#9a6aaa">Known Repos (use alias)</div>
+        <div class="cmd-block">
+          <div class="cmd-code">cfb-recruit-hub   → C:\Users\chris\dev\cfb-recruit-hub
+CFB-mapping       → C:\Users\chris\dev\CFB-mapping
+announce          → C:\Users\chris\dev\announce
+gritos-quicklist  → C:\Users\chris\dev\gritos-quicklist
+chris-miniverse   → C:\Users\chris\chris-miniverse</div>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#9a6aaa">Output Format</div>
+        <div class="output-block">CURRENT VERSION:  [last tag or "none — first release"]
+PROPOSED VERSION: [new semver e.g. v1.2.0]
+BUMP TYPE:        patch | minor | major
+REASON:           [1–2 sentences]
+
+CHANGELOG ENTRY:
+  - [change 1]
+  - [change 2]
+  ...
+
+FILES CHANGED: [count] files across [key areas]
+
+READY TO TAG? Confirm "yes", override "patch"/"minor"/"major", or "cancel"</div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#9a6aaa">After Output — Your Responses</div>
+        <ul class="when-list">
+          <li><div class="when-dot" style="background:#6a3d7a"></div><strong style="color:#ce93d8">"yes"</strong> — tag and push as proposed</li>
+          <li><div class="when-dot" style="background:#6a3d7a"></div><strong style="color:#ce93d8">"patch" / "minor" / "major"</strong> — override bump, agent re-proposes</li>
+          <li><div class="when-dot" style="background:#6a3d7a"></div><strong style="color:#ce93d8">"edit changelog"</strong> — revise bullets, confirm again</li>
+          <li><div class="when-dot" style="background:#6a3d7a"></div><strong style="color:#ef5350">"cancel"</strong> — abort, nothing changes</li>
+        </ul>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#9a6aaa">Miniverse Commands</div>
+        <div class="cmd-block">
+          <div class="cmd-label">Heartbeat</div>
+          <div class="cmd-code" id="vm-hb">curl -X POST http://localhost:4321/api/heartbeat -H "Content-Type: application/json" -d "{\"agent\":\"version-manager\",\"name\":\"Version Manager [rio] • Global\",\"state\":\"working\",\"task\":\"Evaluating version bump\"}"</div>
+          <button class="copy-btn" onclick="copy('vm-hb',this)">Copy</button>
+        </div>
+        <div class="cmd-block">
+          <div class="cmd-label">Speak bubble</div>
+          <div class="cmd-code" id="vm-speak">curl -X POST http://localhost:4321/api/act -H "Content-Type: application/json" -d "{\"agent\":\"version-manager\",\"action\":{\"type\":\"speak\",\"message\":\"Tag ready to push.\"}}"</div>
+          <button class="copy-btn" onclick="copy('vm-speak',this)">Copy</button>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#9a6aaa">System Prompt (summary)</div>
+        <div class="prompt-block">You are a semantic versioning agent. Your job is to evaluate recent changes
+in a git repository, propose a version bump with a changelog entry, and
+execute the tag after confirmation. You work across any repo.
+
+SEMVER RULES:
+  MAJOR (x.0.0) — Breaking changes, schema rewrites, API contract changes.
+                  Never bumped without explicit user confirmation.
+  MINOR (x.y.0) — New features, new modules, new endpoints (backwards-compatible)
+  PATCH (x.y.z) — Bug fixes, copy/style changes, config updates, docs.
+                  Default when in doubt.
+
+WORKFLOW:
+  1. Read: git tag, git log since last tag, git diff --name-only, package.json version
+  2. Evaluate change severity using semver rules
+  3. Output proposal block — WAIT for confirmation
+  4. On "yes": git tag -a [version] -m "..." && git push origin [version]
+     Also bumps package.json version field if present.
+
+SAFETY:
+  - Never tag without explicit "yes"
+  - Never force-push or overwrite existing tags
+  - Warn if uncommitted changes exist before tagging
+  - Always tag HEAD unless user specifies otherwise</div>
+      </div>
+    </div>
+  </div><!-- /panel-version -->
+
+
+  <!-- ══════════════ AUDITOR (PROJECT: CFB RECRUIT HUB) ══════════════ -->
+  <div class="panel" id="panel-auditor" data-scope="project">
+    <div class="agent-card">
+      <div class="agent-card-header header-morty">
+        <div class="agent-icon icon-morty"></div>
+        <div>
+          <div class="agent-name">cfb-recruit-hub-auditor</div>
+          <div class="agent-tagline">Full architecture audit — Foundation · Integration · Surface · Gaps &amp; Observations</div>
+        </div>
+        <div class="agent-scope-badge project">CFB Recruit Hub</div>
+        <div class="agent-meta">
+          <div>Sprite: morty</div>
+          <div>Model: sonnet</div>
+          <div>Memory: project</div>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#a04040">Trigger Phrases</div>
+        <div class="triggers">
+          <div class="trigger">audit the cfb-recruit-hub project</div>
+          <div class="trigger">run the cfb-recruit-hub-auditor</div>
+          <div class="trigger">before we add [feature], run an architecture audit</div>
+          <div class="trigger">give me a baseline snapshot of the codebase</div>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#a04040">When to Trigger</div>
+        <ul class="when-list">
+          <li><div class="when-dot" style="background:#7a1a1a"></div>Before starting any new feature sprint</li>
+          <li><div class="when-dot" style="background:#7a1a1a"></div>After major changes to scoring.js, Code.gs, or App.jsx</li>
+          <li><div class="when-dot" style="background:#7a1a1a"></div>When you want a baseline snapshot of current codebase health</li>
+          <li><div class="when-dot" style="background:#7a1a1a"></div>Before a demo or launch</li>
+        </ul>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#a04040">Output</div>
+        <div class="output-block">Saved to: C:\Users\chris\dev\cfb-recruit-hub\ARCHITECTURE_AUDIT.txt
+
+Four sections:
+  FOUNDATION      — Core logic, data models, backend functions.
+                    Status: STABLE / INCOMPLETE / IN PROGRESS
+  INTEGRATION     — All connections between components and external sources.
+                    Status: FUNCTIONAL / PARTIAL / BROKEN
+  SURFACE         — All user-facing elements, UI gaps, missing states.
+  GAPS &amp; OBS.    — ⚠️ Most critical section. Incomplete, inconsistent,
+                    untested, hardcoded, race conditions, security concerns.
+                    Every finding cites specific file + function.</div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#a04040">Miniverse Commands</div>
+        <div class="cmd-block">
+          <div class="cmd-label">Heartbeat</div>
+          <div class="cmd-code" id="aud-hb">curl -X POST http://localhost:4321/api/heartbeat -H "Content-Type: application/json" -d "{\"agent\":\"cfb-auditor\",\"name\":\"Arch. Auditor [morty] • CFB Hub\",\"state\":\"working\",\"task\":\"Auditing architecture\"}"</div>
+          <button class="copy-btn" onclick="copy('aud-hb',this)">Copy</button>
+        </div>
+        <div class="cmd-block">
+          <div class="cmd-label">Speak bubble</div>
+          <div class="cmd-code" id="aud-speak">curl -X POST http://localhost:4321/api/act -H "Content-Type: application/json" -d "{\"agent\":\"cfb-auditor\",\"action\":{\"type\":\"speak\",\"message\":\"Audit complete.\"}}"</div>
+          <button class="copy-btn" onclick="copy('aud-speak',this)">Copy</button>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#a04040">System Prompt (summary)</div>
+        <div class="prompt-block">You are an elite software architect specializing in React/Vite frontends,
+Google Apps Script backends, and sports-tech data pipelines. Your job is
+to conduct a thorough, structured architecture audit of cfb-recruit-hub.
+
+WORKFLOW:
+  1. READ all source files before writing any output:
+     - src/App.jsx, src/lib/scoring.js, src/lib/constants.js, src/lib/api.js
+     - src/components/* (MapView, QuickListForm, ResultsTable, etc.)
+     - apps-script/Code.gs
+     - package.json, vite.config.ts, .env files, .github/workflows
+
+  2. PRODUCE plain-text audit with four sections:
+     FOUNDATION / INTEGRATION / SURFACE / GAPS AND OBSERVATIONS
+
+  3. SAVE to C:\Users\chris\dev\cfb-recruit-hub\ARCHITECTURE_AUDIT.txt
+
+QUALITY STANDARDS:
+  - Every claim traceable to code actually read
+  - No invented problems or praise — neutral and factual
+  - Missing files noted explicitly
+  - Important findings prefixed with ⚠️
+  - Completeness over brevity — this is an audit, not a summary</div>
+      </div>
+    </div>
+  </div><!-- /panel-auditor -->
+
+
+  <!-- ══════════════ MONITOR (PROJECT: CFB RECRUIT HUB) ══════════════ -->
+  <div class="panel" id="panel-monitor" data-scope="project">
+    <div class="agent-card">
+      <div class="agent-card-header header-dexter">
+        <div class="agent-icon icon-dexter"></div>
+        <div>
+          <div class="agent-name">cfb-recruit-hub-monitor</div>
+          <div class="agent-tagline">Platform health · Auth integrity · Formula validation · Multiuser collision risk</div>
+        </div>
+        <div class="agent-scope-badge project">CFB Recruit Hub</div>
+        <div class="agent-meta">
+          <div>Sprite: dexter</div>
+          <div>Model: sonnet</div>
+          <div>Memory: project</div>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#2a7a9a">Trigger Phrases</div>
+        <div class="triggers">
+          <div class="trigger">run the cfb-recruit-hub-monitor</div>
+          <div class="trigger">check platform health after my Code.gs changes</div>
+          <div class="trigger">some users are getting zero results — run the monitor</div>
+          <div class="trigger">I updated the GrittyOS DB sheet — verify the pipeline</div>
+          <div class="trigger">ready to merge this PR — run a health check first</div>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#2a7a9a">When to Trigger</div>
+        <ul class="when-list">
+          <li><div class="when-dot" style="background:#1a5a7a"></div>After redeploying Apps Script (Code.gs changes)</li>
+          <li><div class="when-dot" style="background:#1a5a7a"></div>After modifying scoring.js or gate logic</li>
+          <li><div class="when-dot" style="background:#1a5a7a"></div>After updating the GrittyOS DB sheet</li>
+          <li><div class="when-dot" style="background:#1a5a7a"></div>Before merging any PR touching auth, scoring, or data pipelines</li>
+          <li><div class="when-dot" style="background:#1a5a7a"></div>When users report zero results or broken submissions</li>
+          <li><div class="when-dot" style="background:#1a5a7a"></div>On-demand for a full system health check</li>
+        </ul>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#2a7a9a">Output Format (per issue)</div>
+        <div class="output-block">SEVERITY:          Critical | Warning | Info
+COMPONENT:         [e.g. Apps Script / scoring.js / MapView]
+ISSUE:             [clear description of what is wrong or at risk]
+RECOMMENDED FIX:   [specific and actionable]
+
+Grouped by 6 categories:
+  1. Auth &amp; Data Integrity    4. Formula Integrity (GRIT FIT)
+  2. API Viability             5. Multiuser Collision Risk
+  3. Data Pipeline Health      6. Surface Stability
+
+No issues in a category → ✓ CLEAR — [category]
+
+Closes with SUMMARY: Critical / Warning / Info counts
++ single highest-priority action.</div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#2a7a9a">Severity Definitions</div>
+        <div class="cmd-block">
+          <div class="cmd-code"><span style="color:#ef5350">Critical</span> — Data loss, SAID collision, silent formula failure, broken API.
+           Platform cannot be trusted until resolved.
+<span style="color:#ffa726">Warning</span>  — Degraded UX, missing data for subset of schools, edge cases.
+<span style="color:#4fc3f7">Info</span>     — Minor gap, improvement opportunity, unconfirmed risk.</div>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#2a7a9a">Miniverse Commands</div>
+        <div class="cmd-block">
+          <div class="cmd-label">Heartbeat</div>
+          <div class="cmd-code" id="mon-hb">curl -X POST http://localhost:4321/api/heartbeat -H "Content-Type: application/json" -d "{\"agent\":\"cfb-monitor\",\"name\":\"Platform Monitor [dexter] • CFB Hub\",\"state\":\"working\",\"task\":\"Monitoring platform health\"}"</div>
+          <button class="copy-btn" onclick="copy('mon-hb',this)">Copy</button>
+        </div>
+        <div class="cmd-block">
+          <div class="cmd-label">Speak bubble</div>
+          <div class="cmd-code" id="mon-speak">curl -X POST http://localhost:4321/api/act -H "Content-Type: application/json" -d "{\"agent\":\"cfb-monitor\",\"action\":{\"type\":\"speak\",\"message\":\"Health check complete.\"}}"</div>
+          <button class="copy-btn" onclick="copy('mon-speak',this)">Copy</button>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#2a7a9a">System Prompt (summary)</div>
+        <div class="prompt-block">You are the CFB Recruit Hub Code and Viability Monitor — an elite platform
+integrity auditor. You find what is broken, at risk, or degraded and report
+it clearly. You do NOT rewrite features, add functionality, or push changes.
+
+PLATFORM:
+  Frontend  : React + Vite → GitHub Pages
+  Backend   : Apps Script Web App (Code.gs) → VITE_API_BASE
+  DB        : Google Sheets — GrittyOS Master DB
+              Recruits tab: cols 1–23 profile, 24–26 status/token/expiry
+              Auth tab: cols 1–12 auth, 13–15 email change fields
+  SAID      : GRIT-[Year]-[NNNN]
+
+6 AUDIT AREAS:
+  1. Auth &amp; Data Integrity — SAIDs, tokens, column mapping, magic links
+  2. API Viability — VITE_API_BASE, CORS, JSON responses, redeploy status
+  3. Data Pipeline — Missing coords, COA, graduation_rate, ADLTV, q_link
+  4. GRIT FIT Formula — Gate 1→2→3 sequence, edge cases, null handling
+  5. Multiuser Collision — SAID counter lock, concurrent tab creation
+  6. Surface Stability — Map markers, dead links, zero-result states
+
+WHAT IT DOES NOT DO:
+  Rewrite features · Add functionality · Modify school data
+  Commit/push · Redeploy Apps Script (flags when needed)</div>
+      </div>
+    </div>
+  </div><!-- /panel-monitor -->
+
+</div><!-- /content -->
+
+<script>
+const SCOPE_COLORS = {
+  global:  '#f5a623',
+  project: '#6ed430',
+};
+
+function showTab(id, el) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => {
+    t.classList.remove('active');
+    t.style.color = '';
+    t.style.borderColor = '';
+  });
+  const panel = document.getElementById('panel-' + id);
+  panel.classList.add('active');
+  el.classList.add('active');
+  const color = SCOPE_COLORS[el.dataset.scope] || '#6ed430';
+  el.style.color = color;
+  el.style.borderColor = color;
+}
+
+function copy(id, btn) {
+  navigator.clipboard.writeText(document.getElementById(id).textContent).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = 'Copied!';
+    btn.style.color = '#6ed430';
+    setTimeout(() => { btn.textContent = orig; btn.style.color = ''; }, 1500);
+  });
+}
+
+// Activate first tab on load
+document.addEventListener('DOMContentLoaded', () => {
+  const first = document.querySelector('.tab');
+  if (first) first.click();
+});
+</script>
+</body>
+</html>
