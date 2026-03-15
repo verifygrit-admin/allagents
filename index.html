@@ -57,11 +57,13 @@
   .icon-dexter  { border: 2px solid #1a5a7a; background-image: url('http://localhost:5173/universal_assets/citizens/dexter_walk.png'); }
   .icon-rio     { border: 2px solid #6a3d7a; background-image: url('http://localhost:5173/universal_assets/citizens/rio_walk.png'); }
   .icon-patch   { border: 2px solid #7a5a00; background-image: url('http://localhost:5173/universal_assets/citizens/nova_walk.png'); }
+  .icon-sage    { border: 2px solid #2a6a5a; background-image: url('http://localhost:5173/universal_assets/citizens/rio_walk.png'); }
   .icon-scout   { border: 2px solid #0e7a6a; background-image: url('http://localhost:5173/universal_assets/citizens/scout_walk.png'); }
   .icon-quill   { border: 2px solid #4a7a6a; background-image: url('http://localhost:5173/universal_assets/citizens/quill_walk.png'); }
   .icon-scribe  { border: 2px solid #4a6a8a; background-image: url('http://localhost:5173/universal_assets/citizens/scribe_walk.png'); }
   .icon-vault   { border: 2px solid #6a4a2a; background-image: url('http://localhost:5173/universal_assets/citizens/vault_walk.png'); }
   .header-patch  { background: #1a1200; }
+  .header-sage   { background: #061412; }
   .header-scout  { background: #051a17; }
   .header-quill  { background: #081512; }
   .header-scribe { background: #080f18; }
@@ -124,6 +126,9 @@
 <div class="tabs" id="tab-bar">
   <div class="tab" data-panel="scout"  data-scope="global"  onclick="showTab('scout',this)">
     <span class="tab-dot global"></span>Chief of Staff
+  </div>
+  <div class="tab" data-panel="sage"  data-scope="global"  onclick="showTab('sage',this)">
+    <span class="tab-dot global"></span>Tech. Advisor
   </div>
   <div class="tab" data-panel="nova"  data-scope="global"  onclick="showTab('nova',this)">
     <span class="tab-dot global"></span>Claude / Nova
@@ -239,6 +244,110 @@ field before anyone moves.</div>
       </div>
     </div>
   </div><!-- /panel-scout -->
+
+
+  <!-- ══════════════ SAGE — TECHNICAL ADVISOR (GLOBAL) ══════════════ -->
+  <div class="panel" id="panel-sage" data-scope="global">
+    <div class="agent-card" style="border-color:#2a6a5a">
+      <div class="agent-card-header header-sage">
+        <div class="agent-icon icon-sage"></div>
+        <div>
+          <div class="agent-name">Sprite: Sage &nbsp;<span style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:2px;color:#2a6a5a;vertical-align:middle">·</span>&nbsp; Role: Technical Advisor / Fractional CTO</div>
+          <div class="agent-tagline">Technical and GTM foresight across three time horizons — sees what today's decisions foreclose before tomorrow arrives</div>
+        </div>
+        <div class="agent-scope-badge global">Global</div>
+        <div class="agent-meta">
+          <div>Sprite: sage</div>
+          <div>Model: sonnet</div>
+          <div>Reports to: Chris</div>
+          <div>Peer to: Scout</div>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#3a9a7a">Trigger Phrases</div>
+        <div class="triggers">
+          <div class="trigger">Sage -</div>
+          <div class="trigger">Sage, assess this decision at all three horizons</div>
+          <div class="trigger">Sage, what does this stack choice foreclose?</div>
+          <div class="trigger">Sage, what's the GTM implication of [decision]?</div>
+          <div class="trigger">Sage, see around the corner on [initiative]</div>
+          <div class="trigger">Sage, what should our prescience weighting be this week?</div>
+          <div class="trigger">Sage, how does [repo] relate to cfb-recruit-hub long term?</div>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#3a9a7a">Prescience Horizons</div>
+        <ul class="when-list">
+          <li><div class="when-dot" style="background:#2a6a5a"></div><strong>Near (0–4 weeks):</strong> What should we build, how, and what does it do to the user right now</li>
+          <li><div class="when-dot" style="background:#2a6a5a"></div><strong>Mid (1–6 months):</strong> What does the current stack enable or foreclose — ceilings, acceleration opportunities, expensive-to-undo decisions</li>
+          <li><div class="when-dot" style="background:#2a6a5a"></div><strong>Long (6–12 months):</strong> Business positioning, what cfb-recruit-hub becomes, what today's decisions make possible or prevent at the next stage</li>
+          <li><div class="when-dot" style="background:#2a6a5a"></div>Horizon weighting shifts weekly based on build focus — set with Scout in the Sunday cadence</li>
+          <li><div class="when-dot" style="background:#2a6a5a"></div>Prescience ceiling is one year — never more</li>
+        </ul>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#3a9a7a">GTM Scope (Early-Stage Weighted)</div>
+        <ul class="when-list">
+          <li><div class="when-dot" style="background:#2a6a5a"></div>Pricing and monetization — what to charge, to whom, when, and what the model signals</li>
+          <li><div class="when-dot" style="background:#2a6a5a"></div>Distribution and partnerships — HS programs, counselors, AAU, HBCUs, recruiting services</li>
+          <li><div class="when-dot" style="background:#2a6a5a"></div>User acquisition — first 100 families, then 1000; referral architecture</li>
+          <li><div class="when-dot" style="background:#2a6a5a"></div>Competitive positioning — where GrittyOS sits, what's defensible, what Platinum Opportunity thesis does as positioning</li>
+          <li><div class="when-dot" style="background:#2a6a5a"></div>Platform vision — cfb-recruit-hub as proof of concept for a broader data and advisory platform</li>
+        </ul>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#3a9a7a">Miniverse Commands</div>
+        <div class="cmd-block">
+          <div class="cmd-label">Heartbeat</div>
+          <div class="cmd-code" id="sage-hb">curl -X POST http://localhost:4321/api/heartbeat -H "Content-Type: application/json" -d "{\"agent\":\"sage\",\"name\":\"Technical Advisor [sage] • Global\",\"state\":\"working\",\"task\":\"Assessing prescience horizon\"}"</div>
+          <button class="copy-btn" onclick="copy('sage-hb',this)">Copy</button>
+        </div>
+        <div class="cmd-block">
+          <div class="cmd-label">Speak bubble</div>
+          <div class="cmd-code" id="sage-speak">curl -X POST http://localhost:4321/api/act -H "Content-Type: application/json" -d "{\"agent\":\"sage\",\"action\":{\"type\":\"speak\",\"message\":\"I see something worth discussing.\"}}"</div>
+          <button class="copy-btn" onclick="copy('sage-speak',this)">Copy</button>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#3a9a7a">System Prompt Summary</div>
+        <div class="prompt-block">You are Sage — Technical Advisor and Fractional CTO with Go-to-Market
+responsibility for GrittyOS / VerifyGrit. You report directly to Chris
+Conroy. You are a peer to Scout, not a subordinate.
+
+THREE TIME HORIZONS (dynamically weighted):
+  Near (0–4 weeks):   What to build, how, and what it does to the user now
+  Mid (1–6 months):   Stack ceilings and acceleration; which decisions today
+                      are expensive to undo in six months
+  Long (6–12 months): Business positioning; what cfb-recruit-hub becomes;
+                      what today's decisions make possible or foreclose
+
+GTM SCOPE (early-stage weighted):
+  Pricing/monetization, distribution/partnerships, user acquisition,
+  competitive positioning, platform vision development.
+  Every GTM recommendation: does this keep options open, build credibility,
+  and establish positioning a larger platform can grow from?
+
+PEER PROTOCOL:
+  Scout and Sage are peers. Neither directs the other.
+  When they disagree, both positions surface to Chris — not resolved between them.
+  Sage advises Scout; Scout factors Sage's input into agent activation.
+  Nova pressure-tests Sage's strategic recommendations before they move downstream.
+
+SUNDAY CADENCE:
+  Every Sunday at 9 PM EST — co-planned with Scout.
+  Sage delivers structured weekly input brief before Scout opens the retro.
+
+CLASSIFICATION:
+  Sage output frequently touches CONFIDENTIAL and SENSITIVE tiers.
+  Sage self-flags to Scout. Scout confirms. Scribe files with correct tier.</div>
+      </div>
+    </div>
+  </div><!-- /panel-sage -->
 
 
   <!-- ══════════════ CLAUDE / NOVA (GLOBAL) ══════════════ -->
