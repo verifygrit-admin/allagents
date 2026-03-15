@@ -114,6 +114,9 @@
 
 <!-- ── Tab bar ── -->
 <div class="tabs" id="tab-bar">
+  <div class="tab" data-panel="nova"  data-scope="global"  onclick="showTab('nova',this)">
+    <span class="tab-dot global"></span>Claude / Nova
+  </div>
   <div class="tab" data-panel="version"  data-scope="global"  onclick="showTab('version',this)">
     <span class="tab-dot global"></span>Version Manager
   </div>
@@ -129,6 +132,63 @@
 </div>
 
 <div class="content">
+
+  <!-- ══════════════ CLAUDE / NOVA (GLOBAL) ══════════════ -->
+  <div class="panel" id="panel-nova" data-scope="global">
+    <div class="agent-card">
+      <div class="agent-card-header header-nova">
+        <div class="agent-icon icon-nova"></div>
+        <div>
+          <div class="agent-name">Sprite: Nova &nbsp;<span style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:2px;color:#2a5a1a;vertical-align:middle">·</span>&nbsp; Role: Claude (Primary)</div>
+          <div class="agent-tagline">Main conversational agent — orchestrates all other agents, handles general tasks across all projects</div>
+        </div>
+        <div class="agent-scope-badge global">Global</div>
+        <div class="agent-meta">
+          <div>Sprite: nova</div>
+          <div>Model: sonnet</div>
+          <div>Memory: project</div>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#4a9a2a">What Nova Does</div>
+        <ul class="when-list">
+          <li><div class="when-dot" style="background:#2a5a1a"></div>Primary interface for all tasks — code, planning, writing, debugging</li>
+          <li><div class="when-dot" style="background:#2a5a1a"></div>Orchestrates specialized agents (Morty, Dexter, Rio, Patch) by launching them as subagents</li>
+          <li><div class="when-dot" style="background:#2a5a1a"></div>Reads memory across sessions via the auto-memory system</li>
+          <li><div class="when-dot" style="background:#2a5a1a"></div>Handles tasks that don't belong to a specialized agent</li>
+          <li><div class="when-dot" style="background:#2a5a1a"></div>Appears in the ocean lab world when any Claude Code session is active</li>
+        </ul>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#4a9a2a">How to Invoke Specialized Agents</div>
+        <div class="output-block">run Morty       → cfb-recruit-hub-auditor  (architecture audit)
+run Dexter      → cfb-recruit-hub-monitor  (platform health check)
+run Rio         → version-manager          (semver tag + push)
+run Patch       → gas-engineer             (Code.gs repair + schema validation)
+
+Also works:
+"have Morty audit the codebase"
+"ask Patch to fix the cols 24-26 bug"
+"let Rio cut a version for cfb-recruit-hub"
+"have Dexter check platform health after the deploy"</div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#4a9a2a">Miniverse Behavior</div>
+        <ul class="when-list">
+          <li><div class="when-dot" style="background:#2a5a1a"></div>Idle: standing animation when no session active</li>
+          <li><div class="when-dot" style="background:#2a5a1a"></div>Thinking: state set on UserPromptSubmit — "On it..."</li>
+          <li><div class="when-dot" style="background:#2a5a1a"></div>Working: state + tool label on PostToolUse (Reading, Editing, Searching...)</li>
+          <li><div class="when-dot" style="background:#2a5a1a"></div>Done: "Done." spoken on Stop event</li>
+          <li><div class="when-dot" style="background:#2a5a1a"></div>Offline: state set on SessionEnd</li>
+        </ul>
+      </div>
+
+    </div>
+  </div><!-- /panel-nova -->
+
 
   <!-- ══════════════ VERSION MANAGER (GLOBAL) ══════════════ -->
   <div class="panel" id="panel-version" data-scope="global">
