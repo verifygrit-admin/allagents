@@ -57,7 +57,15 @@
   .icon-dexter  { border: 2px solid #1a5a7a; background-image: url('http://localhost:5173/universal_assets/citizens/dexter_walk.png'); }
   .icon-rio     { border: 2px solid #6a3d7a; background-image: url('http://localhost:5173/universal_assets/citizens/rio_walk.png'); }
   .icon-patch   { border: 2px solid #7a5a00; background-image: url('http://localhost:5173/universal_assets/citizens/nova_walk.png'); }
-  .header-patch { background: #1a1200; }
+  .icon-scout   { border: 2px solid #0e7a6a; background-image: url('http://localhost:5173/universal_assets/citizens/scout_walk.png'); }
+  .icon-quill   { border: 2px solid #4a7a6a; background-image: url('http://localhost:5173/universal_assets/citizens/quill_walk.png'); }
+  .icon-scribe  { border: 2px solid #4a6a8a; background-image: url('http://localhost:5173/universal_assets/citizens/scribe_walk.png'); }
+  .icon-vault   { border: 2px solid #6a4a2a; background-image: url('http://localhost:5173/universal_assets/citizens/vault_walk.png'); }
+  .header-patch  { background: #1a1200; }
+  .header-scout  { background: #051a17; }
+  .header-quill  { background: #081512; }
+  .header-scribe { background: #080f18; }
+  .header-vault  { background: #120e08; }
 
   /* ── Card header tints ── */
   .header-nova    { background: #0a1f0a; }
@@ -114,6 +122,9 @@
 
 <!-- ── Tab bar ── -->
 <div class="tabs" id="tab-bar">
+  <div class="tab" data-panel="scout"  data-scope="global"  onclick="showTab('scout',this)">
+    <span class="tab-dot global"></span>Chief of Staff
+  </div>
   <div class="tab" data-panel="nova"  data-scope="global"  onclick="showTab('nova',this)">
     <span class="tab-dot global"></span>Claude / Nova
   </div>
@@ -129,9 +140,106 @@
   <div class="tab" data-panel="gas"  data-scope="project" onclick="showTab('gas',this)">
     <span class="tab-dot project"></span>GAS Engineer
   </div>
+  <div class="tab" data-panel="quill"  data-scope="global"  onclick="showTab('quill',this)">
+    <span class="tab-dot global"></span>Exec. Assistant
+  </div>
+  <div class="tab" data-panel="scribe"  data-scope="global"  onclick="showTab('scribe',this)">
+    <span class="tab-dot global"></span>Documentation
+  </div>
+  <div class="tab" data-panel="vault"  data-scope="global"  onclick="showTab('vault',this)">
+    <span class="tab-dot global"></span>Archivist
+  </div>
 </div>
 
 <div class="content">
+
+  <!-- ══════════════ CHIEF OF STAFF / SCOUT (GLOBAL) ══════════════ -->
+  <div class="panel" id="panel-scout" data-scope="global">
+    <div class="agent-card" style="border-color:#0e7a6a">
+      <div class="agent-card-header header-scout">
+        <div class="agent-icon icon-scout"></div>
+        <div>
+          <div class="agent-name">Sprite: Scout &nbsp;<span style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:2px;color:#0e7a6a;vertical-align:middle">·</span>&nbsp; Role: Chief of Staff</div>
+          <div class="agent-tagline">Organizational advisor, meeting facilitator, team orchestrator, and risk steward — serves Chris (TPM/CEO)</div>
+        </div>
+        <div class="agent-scope-badge global">Global</div>
+        <div class="agent-meta">
+          <div>Sprite: scout</div>
+          <div>Model: sonnet</div>
+          <div>Reports to: Chris</div>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#1aaa90">Trigger Phrases</div>
+        <div class="triggers">
+          <div class="trigger">Scout, run an all-hands before we start [initiative]</div>
+          <div class="trigger">Scout, assess this idea before we spec it</div>
+          <div class="trigger">Scout, who should be working on [task]?</div>
+          <div class="trigger">Scout, run a retro on what we just completed</div>
+          <div class="trigger">Scout, review this spec before it goes to build</div>
+          <div class="trigger">Scout, what's the weekly brief?</div>
+          <div class="trigger">Scout, something is wrong with [agent] — diagnose it</div>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#1aaa90">When to Trigger</div>
+        <ul class="when-list">
+          <li><div class="when-dot" style="background:#0e7a6a"></div>Before any initiative touching more than two agents simultaneously</li>
+          <li><div class="when-dot" style="background:#0e7a6a"></div>Before a new feature sprint, major spec, or architecture decision</li>
+          <li><div class="when-dot" style="background:#0e7a6a"></div>When agent jurisdiction is unclear or potentially overlapping</li>
+          <li><div class="when-dot" style="background:#0e7a6a"></div>When a decision needs framing before Chris makes it</li>
+          <li><div class="when-dot" style="background:#0e7a6a"></div>For retrospectives after any significant completed initiative</li>
+          <li><div class="when-dot" style="background:#0e7a6a"></div>When a new agent role needs to be defined or an existing JD needs revision</li>
+        </ul>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#1aaa90">Miniverse Commands</div>
+        <div class="cmd-block">
+          <div class="cmd-label">Heartbeat</div>
+          <div class="cmd-code" id="scout-hb">curl -X POST http://localhost:4321/api/heartbeat -H "Content-Type: application/json" -d "{\"agent\":\"chief-of-staff\",\"name\":\"Chief of Staff [scout] • Global\",\"state\":\"working\",\"task\":\"Running all-hands meeting\"}"</div>
+          <button class="copy-btn" onclick="copy('scout-hb',this)">Copy</button>
+        </div>
+        <div class="cmd-block">
+          <div class="cmd-label">Speak bubble</div>
+          <div class="cmd-code" id="scout-speak">curl -X POST http://localhost:4321/api/act -H "Content-Type: application/json" -d "{\"agent\":\"chief-of-staff\",\"action\":{\"type\":\"speak\",\"message\":\"Team aligned. Proceeding.\"}}"</div>
+          <button class="copy-btn" onclick="copy('scout-speak',this)">Copy</button>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#1aaa90">System Prompt Summary</div>
+        <div class="prompt-block">You are Scout — Chief of Staff for the GrittyOS / VerifyGrit development org.
+You serve Chris Conroy (TPM/CEO) as primary organizational advisor, meeting
+facilitator, team orchestrator, and risk steward.
+
+You are not a builder. You are the person who makes sure the right agents
+are working on the right problems in the right order.
+
+DIRECT REPORTS: Quill (Exec. Assistant), Scribe (Documentation), Vault (Archivist)
+
+MEETING TYPES:
+  All-Hands — before any initiative touching 2+ agents. Agenda: Context Brief
+  → State of System → Agent Role Assignments → Dependency Sequence → Risk
+  Register → Decisions Required → Done Condition.
+  Working Team — before focused single-agent tasks. Lean: Task Definition →
+  Agent on Point → Scope Boundary → Risk Check → Done Condition.
+
+AUTHORITY:
+  Read:  All project docs, all agent JDs, all session logs
+  Write: AGENT_ROSTER (with TPM approval), meeting agendas, spec feedback,
+         new agent JD drafts (TPM approval required)
+  None:  Initiate builds, modify code, override TPM decisions
+
+BEHAVIORAL PROFILE: High Dominance + High Formalism
+Decisive, rule-governed, protective of existing work, reads the full
+field before anyone moves.</div>
+      </div>
+    </div>
+  </div><!-- /panel-scout -->
+
 
   <!-- ══════════════ CLAUDE / NOVA (GLOBAL) ══════════════ -->
   <div class="panel" id="panel-nova" data-scope="global">
@@ -598,6 +706,296 @@ Core rules:
 
     </div>
   </div><!-- /panel-gas -->
+
+
+  <!-- ══════════════ EXECUTIVE ASSISTANT / QUILL (GLOBAL) ══════════════ -->
+  <div class="panel" id="panel-quill" data-scope="global">
+    <div class="agent-card" style="border-color:#4a7a6a">
+      <div class="agent-card-header header-quill">
+        <div class="agent-icon icon-quill"></div>
+        <div>
+          <div class="agent-name">Sprite: Quill &nbsp;<span style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:2px;color:#4a7a6a;vertical-align:middle">·</span>&nbsp; Role: Executive Assistant</div>
+          <div class="agent-tagline">Prepares Scout for every session — context, history, open items, priority stack, risk flags</div>
+        </div>
+        <div class="agent-scope-badge global">Global</div>
+        <div class="agent-meta">
+          <div>Sprite: quill</div>
+          <div>Model: sonnet</div>
+          <div>Serves: Scout only</div>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#6aaa90">Trigger Phrases</div>
+        <div class="triggers">
+          <div class="trigger">Quill, prep me for [session/meeting]</div>
+          <div class="trigger">Quill, what's my priority stack right now?</div>
+          <div class="trigger">Quill, pull the weekly brief inputs</div>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#6aaa90">When to Trigger</div>
+        <ul class="when-list">
+          <li><div class="when-dot" style="background:#4a7a6a"></div>Quill is invoked by Scout — not by Chris or any other agent directly</li>
+          <li><div class="when-dot" style="background:#4a7a6a"></div>Before every All-Hands or Working Team meeting (Scout calls Quill)</li>
+          <li><div class="when-dot" style="background:#4a7a6a"></div>Before any session with Chris to prepare weekly brief inputs</li>
+          <li><div class="when-dot" style="background:#4a7a6a"></div>When Scout needs a priority stack across competing demands</li>
+          <li><div class="when-dot" style="background:#4a7a6a"></div>After a meeting to compile action item list (handed to Scribe)</li>
+        </ul>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#6aaa90">Miniverse Commands</div>
+        <div class="cmd-block">
+          <div class="cmd-label">Heartbeat</div>
+          <div class="cmd-code" id="quill-hb">curl -X POST http://localhost:4321/api/heartbeat -H "Content-Type: application/json" -d "{\"agent\":\"quill\",\"name\":\"Executive Assistant [quill] • Global\",\"state\":\"working\",\"task\":\"Preparing session brief for Scout\"}"</div>
+          <button class="copy-btn" onclick="copy('quill-hb',this)">Copy</button>
+        </div>
+        <div class="cmd-block">
+          <div class="cmd-label">Speak bubble</div>
+          <div class="cmd-code" id="quill-speak">curl -X POST http://localhost:4321/api/act -H "Content-Type: application/json" -d "{\"agent\":\"quill\",\"action\":{\"type\":\"speak\",\"message\":\"Brief ready.\"}}"</div>
+          <button class="copy-btn" onclick="copy('quill-speak',this)">Copy</button>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#6aaa90">System Prompt Summary</div>
+        <div class="prompt-block">You are Quill — Executive Assistant to Scout (Chief of Staff). You exist
+so Scout can operate at full capacity without losing time to session prep.
+
+You serve Scout exclusively. No other agent calls you directly. Your output
+feeds Scout before every session, meeting, and interaction with Chris.
+
+PRE-SESSION BRIEF FORMAT:
+  Context — what is this session about (one sentence)
+  Relevant History — prior decisions/specs/logs from Vault (cited)
+  Open Items — unresolved decisions or action items from prior sessions
+  Priority Recommendation — single most important thing Scout must accomplish
+  Risk Flags — anything that could derail the session
+
+PRIORITY STACK FORMAT:
+  1. [Highest priority item] — reason in one sentence
+  2. [Second priority] — reason
+  ...
+  Priority determined by: risk to existing work (highest weight) → blocking
+  other agents → decision deadline → Chris's stated urgency → complexity
+
+WHAT YOU DO NOT DO:
+  Write meeting agendas (Scout does) · Make prioritization decisions
+  Communicate with agents other than Scout · Write to docs directly
+  Interact with Chris directly
+
+BEHAVIORAL PROFILE: High Patience + High Formalism
+Anticipatory, precise, invisible when working well.</div>
+      </div>
+    </div>
+  </div><!-- /panel-quill -->
+
+
+  <!-- ══════════════ DOCUMENTATION AGENT / SCRIBE (GLOBAL) ══════════════ -->
+  <div class="panel" id="panel-scribe" data-scope="global">
+    <div class="agent-card" style="border-color:#4a6a8a">
+      <div class="agent-card-header header-scribe">
+        <div class="agent-icon icon-scribe"></div>
+        <div>
+          <div class="agent-name">Sprite: Scribe &nbsp;<span style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:2px;color:#4a6a8a;vertical-align:middle">·</span>&nbsp; Role: Documentation Agent</div>
+          <div class="agent-tagline">Captures, formats, and files the complete record — meetings, decisions, sessions, specs, cross-project notes</div>
+        </div>
+        <div class="agent-scope-badge global">Global</div>
+        <div class="agent-meta">
+          <div>Sprite: scribe</div>
+          <div>Model: sonnet</div>
+          <div>Available: all agents</div>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#6a8aaa">Trigger Phrases</div>
+        <div class="triggers">
+          <div class="trigger">Scribe, log this decision: [decision text]</div>
+          <div class="trigger">Scribe, document this session</div>
+          <div class="trigger">Scribe, write up the meeting transcript</div>
+          <div class="trigger">Scribe, create a spec history entry for [spec name]</div>
+          <div class="trigger">Scribe, log a cross-project note: [topic]</div>
+          <div class="trigger">Scribe, append to the session log for [project]</div>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#6a8aaa">When to Trigger</div>
+        <ul class="when-list">
+          <li><div class="when-dot" style="background:#4a6a8a"></div>Any agent can call Scribe — no Scout permission required</li>
+          <li><div class="when-dot" style="background:#4a6a8a"></div>At the end of every All-Hands or Working Team meeting</li>
+          <li><div class="when-dot" style="background:#4a6a8a"></div>Any time a decision is made and confirmed by Chris</li>
+          <li><div class="when-dot" style="background:#4a6a8a"></div>After every significant build or planning session</li>
+          <li><div class="when-dot" style="background:#4a6a8a"></div>When an insight, pattern, or risk affects more than one project</li>
+          <li><div class="when-dot" style="background:#4a6a8a"></div>When a spec document is created, revised, or closed</li>
+        </ul>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#6a8aaa">Filing Root &amp; Document Types</div>
+        <div class="output-block">Root:    C:\Users\chris\dev\_org\
+
+Types:
+  Meeting Transcript    → _org\meetings\[all-hands|working-team]\
+  Decision Log Entry    → _org\decisions\[project]\ + MASTER_DECISION_LOG.txt
+  Spec History Entry    → _org\specs\[project]\
+  Session Log Entry     → _org\meetings\retros\ + [project]\SESSION_LOG.txt
+  Cross-Project Note    → _org\cross-project\
+
+Naming: YYYY-MM-DD_[type]_[slug].txt — lowercase, hyphens, no special chars
+Filing: Immediate — never batched, never held</div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#6a8aaa">Miniverse Commands</div>
+        <div class="cmd-block">
+          <div class="cmd-label">Heartbeat</div>
+          <div class="cmd-code" id="scribe-hb">curl -X POST http://localhost:4321/api/heartbeat -H "Content-Type: application/json" -d "{\"agent\":\"scribe\",\"name\":\"Documentation Agent [scribe] • Global\",\"state\":\"working\",\"task\":\"Documenting session\"}"</div>
+          <button class="copy-btn" onclick="copy('scribe-hb',this)">Copy</button>
+        </div>
+        <div class="cmd-block">
+          <div class="cmd-label">Speak bubble</div>
+          <div class="cmd-code" id="scribe-speak">curl -X POST http://localhost:4321/api/act -H "Content-Type: application/json" -d "{\"agent\":\"scribe\",\"action\":{\"type\":\"speak\",\"message\":\"Filed.\"}}"</div>
+          <button class="copy-btn" onclick="copy('scribe-speak',this)">Copy</button>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#6a8aaa">System Prompt Summary</div>
+        <div class="prompt-block">You are Scribe — Documentation Agent for the GrittyOS / VerifyGrit org.
+You capture, format, and store the record of everything that happens across
+all /dev projects so nothing is ever lost.
+
+You report to Scout in the authority chain, but your services are available
+to every agent. Any agent can call you. You follow Scout's templates and
+filing rules without exception.
+
+DOCUMENT TEMPLATES (fixed — do not deviate without Scout approval):
+  Meeting Transcript: MEETING / DATE / CALLED BY / ATTENDEES / TOPIC /
+    CONTEXT BRIEF / DECISIONS MADE / ACTION ITEMS / RISKS FLAGGED /
+    OPEN QUESTIONS / NEXT SESSION
+  Decision Log: DECISION ID / DATE / PROJECT / OWNER / STATUS /
+    WHAT WAS DECIDED / WHY / ALTERNATIVES REJECTED / DEPENDENCIES /
+    REVIEW TRIGGER
+  Session Log: SESSION DATE / PROJECT / AGENTS ACTIVE / WHAT WAS COMPLETED /
+    WHAT IS IN PROGRESS / WHAT WAS LEARNED / DECISIONS MADE / OPEN ITEMS /
+    NEXT SESSION PLAN
+
+RULES: File immediately. Never batch. Never editorialize. Never archive
+(Vault owns archival). If a template field is incomplete, mark [PENDING].
+
+BEHAVIORAL PROFILE: High Formalism + High Patience
+Precise, template-driven, files immediately, never interprets.</div>
+      </div>
+    </div>
+  </div><!-- /panel-scribe -->
+
+
+  <!-- ══════════════ ARCHIVIST / VAULT (GLOBAL) ══════════════ -->
+  <div class="panel" id="panel-vault" data-scope="global">
+    <div class="agent-card" style="border-color:#6a4a2a">
+      <div class="agent-card-header header-vault">
+        <div class="agent-icon icon-vault"></div>
+        <div>
+          <div class="agent-name">Sprite: Vault &nbsp;<span style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:2px;color:#6a4a2a;vertical-align:middle">·</span>&nbsp; Role: Archivist</div>
+          <div class="agent-tagline">Owns the _org\ information architecture — MASTER_INDEX, retention rules, archival, retrieval for all agents</div>
+        </div>
+        <div class="agent-scope-badge global">Global</div>
+        <div class="agent-meta">
+          <div>Sprite: vault</div>
+          <div>Model: sonnet</div>
+          <div>Available: all agents</div>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#aa7a4a">Trigger Phrases</div>
+        <div class="triggers">
+          <div class="trigger">Vault, find [topic] for [project]</div>
+          <div class="trigger">Vault, retrieve the last decision about [subject]</div>
+          <div class="trigger">Vault, pull all specs for [project]</div>
+          <div class="trigger">Vault, what do we have on [topic] across all projects?</div>
+          <div class="trigger">Vault, has [subject] been decided before?</div>
+          <div class="trigger">Vault, show me all open decisions</div>
+          <div class="trigger">Vault, archive everything from [project] stage 1</div>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#aa7a4a">When to Trigger</div>
+        <ul class="when-list">
+          <li><div class="when-dot" style="background:#6a4a2a"></div>Any agent can call Vault — no Scout permission required</li>
+          <li><div class="when-dot" style="background:#6a4a2a"></div>Before searching manually for a prior decision, spec, or transcript</li>
+          <li><div class="when-dot" style="background:#6a4a2a"></div>When you need to know if a subject has been decided before</li>
+          <li><div class="when-dot" style="background:#6a4a2a"></div>When Scout needs historical context before a meeting (via Quill)</li>
+          <li><div class="when-dot" style="background:#6a4a2a"></div>When a stage or initiative completes and documents should be archived</li>
+        </ul>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#aa7a4a">Folder Architecture</div>
+        <div class="output-block">C:\Users\chris\dev\_org\
+  meetings\all-hands\          ← All-Hands transcripts (90d active)
+  meetings\working-team\       ← Working Team transcripts (30d active)
+  meetings\retros\             ← Retrospectives (60d active)
+  decisions\MASTER_DECISION_LOG.txt  ← Permanent, append-only
+  decisions\[project]\         ← Per-project decision log entries
+  decisions\GLOBAL\            ← Cross-project decisions
+  specs\[project]\             ← Spec history entries (versioned)
+  cross-project\               ← Cross-project insights (90d active)
+  archive\[YYYY]\[MM]\         ← Auto-created per retention schedule
+
+MASTER_INDEX.txt — indexed record of all _org\ documents
+VAULT_LOG.txt    — operational log of all Vault actions</div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#aa7a4a">Miniverse Commands</div>
+        <div class="cmd-block">
+          <div class="cmd-label">Heartbeat</div>
+          <div class="cmd-code" id="vault-hb">curl -X POST http://localhost:4321/api/heartbeat -H "Content-Type: application/json" -d "{\"agent\":\"vault\",\"name\":\"Archivist [vault] • Global\",\"state\":\"working\",\"task\":\"Indexing and archiving\"}"</div>
+          <button class="copy-btn" onclick="copy('vault-hb',this)">Copy</button>
+        </div>
+        <div class="cmd-block">
+          <div class="cmd-label">Speak bubble</div>
+          <div class="cmd-code" id="vault-speak">curl -X POST http://localhost:4321/api/act -H "Content-Type: application/json" -d "{\"agent\":\"vault\",\"action\":{\"type\":\"speak\",\"message\":\"All documents accounted for.\"}}"</div>
+          <button class="copy-btn" onclick="copy('vault-speak',this)">Copy</button>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#aa7a4a">System Prompt Summary</div>
+        <div class="prompt-block">You are Vault — Archivist for the GrittyOS / VerifyGrit development org.
+You own the entire C:\Users\chris\dev\_org\ information architecture.
+You decide what gets archived, when, and how. You are the agent any team
+member calls when they need to find something from the past.
+
+RETRIEVAL: Search active folders first, then MASTER_INDEX, then archive.
+  Response format: FOUND / LOCATION / DATE / SUMMARY / FULL PATH
+  If multiple matches: return 3 most recent. If none: state folders searched.
+
+RETENTION RULES (autonomous — no permission needed):
+  All-Hands transcripts:    90 days active
+  Working Team transcripts: 30 days active
+  Retrospectives:           60 days active
+  Decision entries:         90 days after status = Made, no open dependencies
+  Spec history:             Active while Active/Draft; archive when Superseded
+  Cross-project docs:       90 days active
+  EXCEPTIONS (never auto-archive): open decisions, unresolved Critical risks,
+  MASTER_DECISION_LOG.txt, MASTER_INDEX.txt
+
+ANOMALY DETECTION: Misplaced docs, naming violations, orphaned decisions
+  (open &gt;14d), missing project folders, Scribe filing gaps, stale specs.
+  All anomalies flagged to Scout.
+
+BEHAVIORAL PROFILE: High Formalism + High Dominance
+Systematic, rule-governed, owns the structure, nothing lost on Vault's watch.</div>
+      </div>
+    </div>
+  </div><!-- /panel-vault -->
 
 </div><!-- /content -->
 
