@@ -161,6 +161,12 @@
   <div class="tab" data-panel="vault"  data-scope="global"  onclick="showTab('vault',this)">
     <span class="tab-dot global"></span>Archivist
   </div>
+  <div class="tab" data-panel="quin"  data-scope="project" onclick="showTab('quin',this)">
+    <span class="tab-dot project"></span>QA Agent
+  </div>
+  <div class="tab" data-panel="david"  data-scope="global"  onclick="showTab('david',this)">
+    <span class="tab-dot global"></span>Data Steward
+  </div>
   <div class="tab" data-panel="governance" data-scope="global" onclick="showTab('governance',this)">
     <span class="tab-dot global"></span>Governance
   </div>
@@ -181,6 +187,7 @@
         <div class="agent-meta">
           <div>Sprite: scout</div>
           <div>Model: sonnet</div>
+          <div>Terminal: <span style="color:#ff4040">●</span> red</div>
           <div>Reports to: Chris</div>
         </div>
       </div>
@@ -311,6 +318,7 @@ field before anyone moves.</div>
         <div class="agent-meta">
           <div>Sprite: sage</div>
           <div>Model: sonnet</div>
+          <div>Terminal: <span style="color:#40e0d0">●</span> cyan</div>
           <div>Reports to: Chris</div>
           <div>Peer to: Scout</div>
         </div>
@@ -443,6 +451,7 @@ AUTHORITY:
         <div class="agent-meta">
           <div>Sprite: nova</div>
           <div>Model: sonnet</div>
+          <div>Terminal: default (main agent)</div>
           <div>Memory: project</div>
         </div>
       </div>
@@ -555,6 +564,7 @@ PI PROFILE: High Extraversion + High Dominance</div>
         <div class="agent-meta">
           <div>Sprite: rio</div>
           <div>Model: sonnet</div>
+          <div>Terminal: <span style="color:#ffa040">●</span> orange</div>
           <div>Memory: project</div>
         </div>
       </div>
@@ -692,6 +702,7 @@ SAFETY:
         <div class="agent-meta">
           <div>Sprite: morty</div>
           <div>Model: sonnet</div>
+          <div>Terminal: <span style="color:#ff4040">●</span> red</div>
           <div>Memory: project</div>
         </div>
       </div>
@@ -805,6 +816,7 @@ QUALITY STANDARDS:
         <div class="agent-meta">
           <div>Sprite: dexter</div>
           <div>Model: sonnet</div>
+          <div>Terminal: <span style="color:#4090ff">●</span> blue</div>
           <div>Memory: project</div>
         </div>
       </div>
@@ -933,6 +945,7 @@ WHAT IT DOES NOT DO:
         <div class="agent-meta">
           <div>Sprite: patch</div>
           <div>Model: sonnet</div>
+          <div>Terminal: <span style="color:#b060ff">●</span> purple</div>
           <div>Memory: project</div>
         </div>
       </div>
@@ -1036,6 +1049,7 @@ AUTHORITY: Code.gs and apps-script/ directory only.
         <div class="agent-meta">
           <div>Sprite: quill</div>
           <div>Model: sonnet</div>
+          <div>Terminal: <span style="color:#ffa040">●</span> orange</div>
           <div>Serves: Scout only</div>
         </div>
       </div>
@@ -1141,6 +1155,7 @@ Anticipatory, precise, invisible when working well.</div>
         <div class="agent-meta">
           <div>Sprite: scribe</div>
           <div>Model: sonnet</div>
+          <div>Terminal: <span style="color:#4090ff">●</span> blue</div>
           <div>Available: all agents</div>
         </div>
       </div>
@@ -1255,6 +1270,7 @@ Precise, template-driven, files immediately, never interprets.</div>
         <div class="agent-meta">
           <div>Sprite: vault</div>
           <div>Model: sonnet</div>
+          <div>Terminal: <span style="color:#40e0d0">●</span> cyan</div>
           <div>Available: all agents</div>
         </div>
       </div>
@@ -1360,6 +1376,119 @@ Systematic, rule-governed, owns the structure, nothing lost on Vault's watch.</d
       </div>
     </div>
   </div><!-- /panel-vault -->
+
+
+  <!-- ══════════════ QUIN / QA AGENT (CFB RECRUIT HUB) ══════════════ -->
+  <div class="panel" id="panel-quin" data-scope="project">
+    <div class="agent-card" style="border-color:#3a7a5a">
+      <div class="agent-card-header" style="background:#0a1a10">
+        <div class="agent-icon icon-quill"></div>
+        <div>
+          <div class="agent-name">Sprite: Quin &nbsp;<span style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:2px;color:#3a7a5a;vertical-align:middle">·</span>&nbsp; Role: QA Agent</div>
+          <div class="agent-tagline">Test coverage owner — Playwright suite, scoring unit tests, regression detection, pre-deploy gates</div>
+        </div>
+        <div class="agent-scope-badge project">CFB Recruit Hub</div>
+        <div class="agent-meta">
+          <div>Sprite: quill (placeholder)</div>
+          <div>Model: sonnet</div>
+          <div>Terminal: <span style="color:#40ff40">●</span> green</div>
+          <div>Reports to: Scout</div>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#3a7a5a">Trigger Phrases</div>
+        <div class="triggers">
+          <div class="trigger">quin -</div>
+          <div class="trigger">qa -</div>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#3a7a5a">When to Invoke</div>
+        <ul class="when-list">
+          <li><span class="when-dot" style="background:#3a7a5a"></span>Assess test coverage for cfb-recruit-hub</li>
+          <li><span class="when-dot" style="background:#3a7a5a"></span>Maintain or review the Playwright regression suite</li>
+          <li><span class="when-dot" style="background:#3a7a5a"></span>Close BL-002 (Flows 1-5 against live platform)</li>
+          <li><span class="when-dot" style="background:#3a7a5a"></span>Diagnose a test failure or plan scoring unit test coverage</li>
+          <li><span class="when-dot" style="background:#3a7a5a"></span>Define pre-deploy test gates for CI pipeline</li>
+        </ul>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#3a7a5a">Jurisdiction</div>
+        <div style="font-size:14px;color:#b8e0a0;line-height:1.7">
+          Quin writes tests, defines coverage, and reports regression status. Does NOT fix bugs (Nova), deploy (Patch), issue PASS confirmations (Dexter), or audit architecture (Morty). Dexter executes the Playwright suite post-deploy; Quin owns the suite itself.
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#3a7a5a">Working Teams</div>
+        <div style="font-size:14px;color:#b8e0a0;line-height:1.7">
+          <strong style="color:#c8f5a0">WT1 Stage Closer</strong> — Gate 2 (Flows 1-5 execution)<br>
+          <strong style="color:#c8f5a0">WT3 Test Fortress</strong> — Lead (GRIT FIT scoring unit tests)
+        </div>
+      </div>
+    </div>
+  </div><!-- /panel-quin -->
+
+
+  <!-- ══════════════ DAVID / DATA STEWARD (GLOBAL) ══════════════ -->
+  <div class="panel" id="panel-david" data-scope="global">
+    <div class="agent-card" style="border-color:#5a4a8a">
+      <div class="agent-card-header" style="background:#100a1a">
+        <div class="agent-icon icon-scribe"></div>
+        <div>
+          <div class="agent-name">Sprite: David &nbsp;<span style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:2px;color:#5a4a8a;vertical-align:middle">·</span>&nbsp; Role: Data Steward</div>
+          <div class="agent-tagline">Master DB integrity owner — 661-school dataset lifecycle, link rot detection, IPEDS sync, Serper script scheduling</div>
+        </div>
+        <div class="agent-scope-badge global">Global</div>
+        <div class="agent-meta">
+          <div>Sprite: scribe (placeholder)</div>
+          <div>Model: sonnet</div>
+          <div>Terminal: <span style="color:#b060ff">●</span> purple</div>
+          <div>Reports to: Scout</div>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#5a4a8a">Trigger Phrases</div>
+        <div class="triggers">
+          <div class="trigger">david -</div>
+          <div class="trigger">data steward -</div>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#5a4a8a">When to Invoke</div>
+        <ul class="when-list">
+          <li><span class="when-dot" style="background:#5a4a8a"></span>Check GrittyOS Master DB integrity (661 schools)</li>
+          <li><span class="when-dot" style="background:#5a4a8a"></span>Detect link rot in q_link, coach_link, or camp_link fields</li>
+          <li><span class="when-dot" style="background:#5a4a8a"></span>Schedule or review Serper script runs (rq_serper, coach_serper, camp_serper)</li>
+          <li><span class="when-dot" style="background:#5a4a8a"></span>IPEDS data sync or validation</li>
+          <li><span class="when-dot" style="background:#5a4a8a"></span>Data quality reporting before or after pipeline updates</li>
+        </ul>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#5a4a8a">Jurisdiction</div>
+        <div style="font-size:14px;color:#b8e0a0;line-height:1.7">
+          David owns the GrittyOS Master DB as a data asset. Does NOT own GRIT FIT Formula logic (scoring.js — Nova), athlete profiles (Profile Agent when activated), or API contracts (Code Monitor when activated). Serves both cfb-recruit-hub and CFB-mapping.
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#5a4a8a">Key Data</div>
+        <div style="font-size:14px;color:#b8e0a0;line-height:1.7">
+          <strong style="color:#c8f5a0">Schools:</strong> 661 programs<br>
+          <strong style="color:#c8f5a0">q_link:</strong> 592/661 populated (~90%)<br>
+          <strong style="color:#c8f5a0">coach_link:</strong> 552/661 populated (~83.5%)<br>
+          <strong style="color:#c8f5a0">camp_link:</strong> In progress (not yet run at scale)<br>
+          <strong style="color:#c8f5a0">Does not require Supabase</strong> — operates against current Sheets structure
+        </div>
+      </div>
+    </div>
+  </div><!-- /panel-david -->
 
 
   <!-- ══════════════ GOVERNANCE (GLOBAL) ══════════════ -->
