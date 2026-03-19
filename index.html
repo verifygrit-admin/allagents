@@ -478,6 +478,8 @@ AUTHORITY:
 Architecture audit             → Morty
 Platform health check          → Dexter
 Version tagging                → Rio
+QA fix routes / unit tests     → Quin (Quin routes to Nova; Nova builds on Quin's spec)
+Data update execution          → David (David routes to Nova; Nova executes on Scout auth)
 Strategic horizon assessment   → Sage
 Source of truth / sequencing   → Scout
 Session documentation          → Scribe
@@ -489,7 +491,9 @@ Document retrieval             → Vault</div>
         <div class="output-block">run Morty       → cfb-recruit-hub-auditor  (architecture audit)
 run Dexter      → cfb-recruit-hub-monitor  (platform health check)
 run Rio         → version-manager          (semver tag + push)
-run Patch       → gas-engineer             (Code.gs repair + schema validation)</div>
+run Patch       → gas-engineer             (Code.gs repair + schema validation)
+run Quin        → qa-agent                 (test coverage + regression diagnosis)
+run David       → data-steward             (Master DB integrity + data quality)</div>
       </div>
 
       <div class="card-section">
@@ -534,6 +538,9 @@ DEFERENCE TRIGGERS:
   Architecture audit        → Morty
   Platform health check     → Dexter
   Version tagging           → Rio
+  QA / test fix routes      → Quin routes to Nova; Nova builds unit tests on Quin's spec
+  Data update execution     → David routes to Nova (link repairs, IPEDS batch, inject runs)
+                               Nova executes on Scout authorization
   Strategic horizon         → Sage (Nova pressure-tests output)
   Source of truth question  → Scout + CHECK WITH ME
   Classification question   → Scout (Nova does not self-classify)
@@ -1508,7 +1515,7 @@ Systematic, rule-governed, owns the structure, nothing lost on Vault's watch.</d
         <div class="agent-meta">
           <div>Last updated: 2026-03-19</div>
           <div>Maintained by: Vault + Scribe</div>
-          <div>Status: ACTIVE (6 protocols)</div>
+          <div>Status: ACTIVE (7 protocols)</div>
         </div>
       </div>
 
@@ -1533,10 +1540,10 @@ SYNTAX: + operator requires exactly one space on each side.
   Case-insensitive: Scout -, SCOUT -, scout - all valid
 
 FULL-ROSTER SHORTHAND — "team -"
-  "team -" invokes all 10 org agents in parallel simultaneously.
+  "team -" invokes all 12 org agents in parallel simultaneously.
   Equivalent to typing every agent name with the + operator.
   Voice command "team" is treated identically to typing "team -".
-  Project-scoped agents (Morty, Dexter, Patch) flag if task is not
+  Project-scoped agents (Morty, Dexter, Patch, Quin) flag if task is not
   cfb-recruit-hub context — they do not refuse invocation.
   Roster resolves from AGENT_ROSTER.txt at time of invocation.
   DEC-GLOBAL-008 | 2026-03-19
@@ -1589,7 +1596,7 @@ SCOUT'S DIRECT REPORTS (support staff):
   Vault  — Archivist, serves all agents, owns _org\ architecture
 
 SCOUT ACTIVATES (operational team):
-  Nova · Rio · Morty · Dexter · Patch
+  Nova · Rio · Morty · Dexter · Patch · Quin · David
 
 AUTHORITY CHAIN:
   Chris (TPM/CEO)
@@ -1597,7 +1604,7 @@ AUTHORITY CHAIN:
     │     ├── Quill (Exec. Assistant — Scout-private)
     │     ├── Scribe (Documentation — shared infrastructure)
     │     ├── Vault (Archivist — shared infrastructure)
-    │     ├── Nova · Rio · Morty · Dexter · Patch
+    │     ├── Nova · Rio · Morty · Dexter · Patch · Quin · David
     └── Sage (Technical Advisor — peer to Scout, not subordinate)
 
 SAGE-SCOUT PEER NOTE: Neither has authority over the other. Conflicts
@@ -1729,10 +1736,45 @@ SHORTHAND COMMANDS (Chris triggers via scout -):
   scout - retrigger [agent]: [trigger] Trigger phrase → CLAUDE.md + operational + descriptive
   scout - sprite [agent]: [visual]     Sprite/visual → operational + descriptive only
 
-ROSTER COVERAGE: All 10 agents (backfill of Rio, Morty, Dexter, Patch
-  completed per DEC-GLOBAL-011).
+ROSTER COVERAGE: All 12 agents (backfill of Rio, Morty, Dexter, Patch
+  completed per DEC-GLOBAL-011; Quin and David added per DEC-GLOBAL-014/015).
 
 DEC-GLOBAL-011 | 2026-03-19</div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#4a9a2a">PROTO-GLOBAL-007 — Broadcast Filing Obligation</div>
+        <div class="prompt-block">RULE: Any "team -" broadcast or multi-agent "+" trigger session constitutes
+a team meeting for filing purposes. Scribe's filing obligation is automatic
+— no explicit "Scribe, document this" is required from any agent or Chris.
+
+SCRIBE FILES (minimum, for every broadcast session):
+  — Full broadcast trigger and task passed to all agents
+  — Each agent's response, attributed by agent name
+  — Any decisions made or confirmed during the broadcast
+  — Any open items raised and not resolved during the session
+
+FILING TARGET:
+  _org\meetings\working-team\ — default for all broadcasts
+  _org\meetings\all-hands\   — if task meets All-Hands criteria
+  Scout makes the filing target determination. If Scout is not present,
+  Scribe defaults to working-team\ and flags for Scout review.
+
+SCOUT MONITORS: After every broadcast, Scout confirms Scribe has filed
+or surfaces the gap before the session closes.
+
+DECISION ENTRIES: Any decision confirmed during a broadcast is handed
+to Scribe as a DECISION_LOG entry. Scribe does not wait to be asked.
+Ambiguous decisions are flagged to Scout — who resolves before filing.
+
+EXCEPTION: Single-agent "[name] -" direct-address triggers do not
+trigger this obligation unless Scout determines it warrants capture.
+
+SUPPLEMENT: BROADCAST_LOG.txt in cross-project\ remains active as a
+supplementary index — Scribe files both the full transcript in meetings\
+and the BROADCAST_LOG entry.
+
+DEC reference: BCAST-001 gap + Scout authorization | 2026-03-19</div>
       </div>
 
     </div><!-- /AOP card -->
