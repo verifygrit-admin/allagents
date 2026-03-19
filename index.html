@@ -1336,7 +1336,7 @@ Systematic, rule-governed, owns the structure, nothing lost on Vault's watch.</d
         <div class="agent-meta">
           <div>Last updated: 2026-03-19</div>
           <div>Maintained by: Vault + Scribe</div>
-          <div>Status: ACTIVE (5 protocols)</div>
+          <div>Status: ACTIVE (6 protocols)</div>
         </div>
       </div>
 
@@ -1520,6 +1520,41 @@ POST-MEETING RETROSPECTIVE (both types):
   DECISION_LOG entries. Scout does not file directly.
 
 Scout calls and runs both meeting types. Nova opens the Context Brief in All-Hands.</div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#4a9a2a">PROTO-GLOBAL-006 — Agent Definition Three-Tier Sync</div>
+        <div class="prompt-block">RULE: Any change to an agent's definition must propagate across all three
+tiers before the change is considered complete and canonical.
+
+THE THREE TIERS:
+  CANONICAL     _org\roster\         (source of truth — edited first, always)
+  OPERATIONAL   .claude\agents\      (what Claude Code loads each session)
+  DESCRIPTIVE   allagents\index.html (governance dashboard visible to Chris)
+
+CHANGE FLOW (always in this sequence — never reversed):
+  1. Scout scopes the change and confirms authority with Chris
+  2. Nova edits the canonical JD in _org\roster\
+  3. grittos-org committed + pushed [PUSH CHECK — Event 11]
+  4. Nova copies to operational .md in .claude\agents\
+  5. Nova updates the agent tab in allagents\index.html
+  6. allagents committed + pushed [PUSH CHECK — Event 11]
+  7. Scribe files DECISION_LOG; Vault indexes the change
+
+TIER AUTHORITY: Canonical tier governs. If tiers conflict, _org\roster\
+  wins. Operational and descriptive tiers are derived from it.
+  Discrepancies discovered mid-session → flag to Chris before proceeding.
+
+WHAT COUNTS AS A CHANGE:
+  JD edits, name/trigger/sprite changes, reporting line or scope changes,
+  new agent onboarding, agent retirement or rename, allagents tab updates.
+
+PUSH PROTOCOL: Steps 3 and 6 covered by Event 11 (cross-repo lockstep).
+
+ROSTER COVERAGE: All 10 agents (backfill of Rio, Morty, Dexter, Patch
+  completed per DEC-GLOBAL-011).
+
+DEC-GLOBAL-011 | 2026-03-19</div>
       </div>
 
     </div><!-- /AOP card -->
