@@ -1525,7 +1525,7 @@ Systematic, rule-governed, owns the structure, nothing lost on Vault's watch.</d
         <div class="agent-meta">
           <div>Last updated: 2026-03-19</div>
           <div>Maintained by: Vault + Scribe</div>
-          <div>Status: ACTIVE (7 protocols)</div>
+          <div>Status: ACTIVE (8 protocols)</div>
         </div>
       </div>
 
@@ -1785,6 +1785,41 @@ supplementary index — Scribe files both the full transcript in meetings\
 and the BROADCAST_LOG entry.
 
 DEC reference: BCAST-001 gap + Scout authorization | 2026-03-19</div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#4a9a2a">PROTO-GLOBAL-008 — Troubleshooting Escalation Protocol</div>
+        <div class="prompt-block">RULE: When an agent encounters a problem it cannot resolve within its own
+authority, it escalates immediately rather than attempting workarounds
+outside its defined domain. Nova reroutes escalations to the correct
+domain owner before any cross-domain action is taken.
+
+THREE-STEP ESCALATION SEQUENCE:
+  1. SELF-ASSESS — agent determines whether the problem is within its
+     authority and domain. If yes, resolve and document. If no, proceed
+     to step 2.
+  2. DOMAIN ROUTE — agent names the domain owner (see table below) and
+     surfaces the problem with full context: what was attempted, what
+     failed, what is needed. Do not attempt the fix first.
+  3. SCOUT/CHRIS ESCALATE — if domain owner cannot resolve, or if the
+     problem touches a source-of-truth document or architecture decision,
+     escalate to Scout immediately. Scout routes to Chris if a TPM decision
+     is required.
+
+DOMAIN ROUTING TABLE:
+  Dexter   CI / deployment failures, GitHub Actions, live-platform health
+  Patch    GAS (Apps Script) — Code.gs failures, clasp issues, deploy errors
+  Quill    Test coordination — pre-session brief gaps, missing context
+  Rio      Version control — tag conflicts, branch sequencing, CHANGELOG gaps
+  David    Data integrity — sheet structure, CSV mismatches, column drift
+  Morty    Architecture — module conflicts, schema decisions, audit findings
+
+NOVA'S REROUTING RULE: If Nova receives a task that requires action in
+another agent's domain, Nova stops, names the domain, and routes the
+handoff explicitly. Nova does not perform cross-domain work silently.
+If no domain owner is active, Nova flags to Scout before proceeding.
+
+DEC reference: DEC-GLOBAL-017 | 2026-03-19</div>
       </div>
 
     </div><!-- /AOP card -->
