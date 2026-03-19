@@ -1354,6 +1354,7 @@ HANDLING SEQUENCE:
   4. Each agent responds in character independently
   5. If "nova" is named, Nova also responds directly
   6. If an agent named in the trigger is not in the roster, stop and flag
+  7. If the same agent appears more than once, treat as a single invocation
 
 SYNTAX: + operator requires exactly one space on each side.
   "scout + sage -" is valid · "scout+sage-" is not recognized
@@ -1367,6 +1368,11 @@ FULL-ROSTER SHORTHAND — "team -"
   cfb-recruit-hub context — they do not refuse invocation.
   Roster resolves from AGENT_ROSTER.txt at time of invocation.
   DEC-GLOBAL-008 | 2026-03-19
+
+EDGE CASES:
+  "team" mid-message (not a prefix trigger) = natural language, no invocation.
+  "team + [agent] -" = redundant; invoke all roster agents once, no double-invoke.
+  Unreachable agent during "team" invocation = flag to Chris, proceed with available.
 
 REVIEW TRIGGER: New agent added to roster; trigger syntax ambiguity reported;
 broadcast shorthand agent list changed due to roster update</div>
@@ -1429,7 +1435,7 @@ SINGLE SOURCE OF TRUTH DOCUMENTS:
   C:\Users\chris\dev\PROJECT_BRIEF.txt
   C:\Users\chris\dev\AUTOMATION_ARCHITECTURE.txt
   C:\Users\chris\dev\AGENT_ROSTER.txt
-  All agent JDs in C:\Users\chris\.claude\agents\
+  Agent JDs — canonical in _org\roster\; operational copies in C:\Users\chris\.claude\agents\
   CLAUDE.md — canonical copy in _org\operating-rules\; operational copy
     at C:\Users\chris\.claude\CLAUDE.md (DEC-GLOBAL-007)</div>
       </div>
@@ -1447,6 +1453,8 @@ NOVA'S PROMPT:
 
 SCOUT'S WATCH (if Nova misses it):
   [SCOUT WATCH] Nova — push check required. Trigger: &lt;event&gt; | Target: &lt;target&gt; | Changed: &lt;what&gt;.
+  Solo-moment / Nova unresponsive:
+  [SCOUT WATCH] Chris — push check may have been missed. Trigger: &lt;event&gt; | Target: &lt;target&gt; | Changed: &lt;what&gt;. Nova should confirm before proceeding.
 
 THE 13 PUSH-GATE EVENTS:
   1.  Session close / pause / "I'll come back to this"
@@ -1467,6 +1475,15 @@ DEFINED TARGETS:
   GitHub      → git push to origin (verify: git status + git log origin/HEAD..HEAD)
   Apps Script → clasp push + clasp deploy (both steps required)
   CLAUDE.md   → commit to _org\operating-rules\ AND copy to C:\Users\chris\.claude\CLAUDE.md
+
+RETROACTIVE TAG RULE (DEC-GLOBAL-006-B):
+  Before pushing any retroactive git tag to a historical commit, run:
+    git log &lt;commit&gt;..HEAD -- .github/
+  If the commit predates a CI/CD workflow fix, the push will re-trigger
+  the broken historical workflow. Options:
+    Accept → document failures as BACKLOG item marked "Accepted — Known Artifact"
+    Skip   → do not push the retroactive tag
+  Rio and Scout must both confirm before any retroactive tag is pushed.
 
 SOURCE: DEC-GLOBAL-006 + DEC-GLOBAL-006-A + DEC-GLOBAL-006-B + DEC-GLOBAL-007</div>
       </div>
@@ -1555,6 +1572,98 @@ HOTFIX CLOSE PROTOCOL (mandatory 7-step sequence):
   7. Rio proposes version tag if version boundary crossed</div>
       </div>
     </div><!-- /jurisdiction card -->
+
+    <!-- DEC-GLOBAL-009 — AUTO-SYNC GOVERNANCE TO ALLAGENTS -->
+    <div class="agent-card" style="border-color:#3b6d11; margin-bottom:20px">
+      <div class="agent-card-header" style="background:#0a1a08; border-bottom:1px solid #2a3d2d">
+        <div style="width:48px;height:48px;border-radius:50%;background:#0a2e14;border:2px solid #3b6d11;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+          <span style="font-family:'Bebas Neue',sans-serif;font-size:16px;color:#6ed430">009</span>
+        </div>
+        <div>
+          <div class="agent-name">DEC-GLOBAL-009 — Governance Sync Protocol</div>
+          <div class="agent-tagline">After each <code style="font-size:11px;color:#6ed430">_org\</code> session, Nova syncs the allagents governance tab and surfaces a [PUSH CHECK]</div>
+        </div>
+        <div class="agent-scope-badge global">Global</div>
+        <div class="agent-meta">
+          <div>Confirmed: 2026-03-19</div>
+          <div>Owner: Nova (executes sync)</div>
+          <div>Status: ACTIVE</div>
+        </div>
+      </div>
+      <div class="card-section">
+        <div class="prompt-block">RULE: _org\ is the foundation of team roles and governance. allagents
+displays them as an accessible reference. They must stay in sync.
+
+SYNC OBLIGATION:
+  After any session in which _org\ governance files are updated, Nova
+  updates the allagents governance tab to reflect the changes and surfaces
+  a [PUSH CHECK] before the session closes. This step is mandatory —
+  not optional.
+
+MECHANISM: Manual workflow step (not an automated hook). Nova syncs
+  after each _org\ session and surfaces [PUSH CHECK] for Chris to confirm.
+  Push Protocol Event 11 (cross-repo lockstep: allagents ↔ _org) applies.
+
+AUTOMATED PUSH: Not active. Fully automated push (no confirmation step)
+  requires a new defined target in PROTO-GLOBAL-004 via CHECK WITH ME
+  before Nova may implement it.
+
+WHAT COUNTS AS AN _org\ UPDATE:
+  Any change to AGENT_OPERATING_PROTOCOLS.txt, CLAUDE.md (operating-rules\),
+  AGENT_ROSTER.txt, any agent JD in roster\, or any cross-project protocol.
+  Decisions filed alone (no protocol text changed) do not require a
+  governance tab sync unless decision content is being surfaced in the tab.
+
+DECISION FILE: decisions\GLOBAL\2026-03-19_decision_auto-sync-governance-allagents.txt</div>
+      </div>
+    </div><!-- /dec-009 card -->
+
+    <!-- VAULT RETRIEVAL — DECISION FILES -->
+    <div class="agent-card" style="border-color:#7a5a9a; margin-bottom:20px">
+      <div class="agent-card-header" style="background:#0e0a14; border-bottom:1px solid #2a2040">
+        <div style="width:48px;height:48px;border-radius:50%;background:#1a0e2e;border:2px solid #7a5a9a;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+          <span style="font-family:'Bebas Neue',sans-serif;font-size:20px;color:#aa8adf">VLT</span>
+        </div>
+        <div>
+          <div class="agent-name">Vault — Decision Retrieval</div>
+          <div class="agent-tagline">Agents invoke Vault directly to retrieve decisions — no direction from Chris required</div>
+        </div>
+        <div class="agent-scope-badge global">Global</div>
+        <div class="agent-meta">
+          <div>Agent: Vault (archivist)</div>
+          <div>Trigger: <code style="font-size:11px;color:#aa8adf">vault -</code></div>
+          <div>Autonomous retrieval: YES</div>
+        </div>
+      </div>
+      <div class="card-section">
+        <div class="prompt-block">Vault is the authoritative retrieval agent for all _org\ documents.
+Any agent may invoke Vault independently to retrieve decisions, specs,
+meeting transcripts, or protocol history — without waiting for Chris
+to direct it.
+
+HOW TO INVOKE VAULT FOR RETRIEVAL:
+  vault - find decision [DEC-ID or topic]
+  vault - retrieve [document name or path]
+  vault - show all decisions for [project or scope]
+  vault - what was decided about [topic]
+
+KEY PATHS:
+  Decision registry:  _org\decisions\MASTER_DECISION_LOG.txt
+  GLOBAL decisions:   _org\decisions\GLOBAL\
+  CFB decisions:      _org\decisions\cfb-recruit-hub\
+  Meeting logs:       _org\meetings\
+  Agent roster:       _org\roster\AGENT_ROSTER.txt
+  Agent JDs:          _org\roster\[AGENT]_JD.txt (canonical)
+  Operational JDs:    C:\Users\chris\.claude\agents\ (loaded each session)
+  Protocols:          _org\cross-project\AGENT_OPERATING_PROTOCOLS.txt
+  Index:              _org\MASTER_INDEX.txt
+  Activity log:       _org\VAULT_LOG.txt
+
+VAULT'S ROLE: Vault does not wait to be asked by Chris. If an agent
+needs context from _org\ to complete a task, that agent invokes Vault.
+Vault retrieves and returns. This is Vault's standing function.</div>
+      </div>
+    </div><!-- /vault retrieval card -->
 
   </div><!-- /panel-governance -->
 
