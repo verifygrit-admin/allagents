@@ -47,8 +47,8 @@
   .agent-scope-badge.global  { background: #f5a623; color: #1a0e00; }
   .agent-scope-badge.project { background: #1a3d1a; color: #6ed430; border: 1px solid #3b6d11; }
   .agent-name { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: #c8f5a0; }
-  .agent-tagline { font-size: 12px; color: #6b8c72; margin-top: 2px; }
-  .agent-meta { text-align: right; font-size: 11px; color: #4a6b4d; font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.5px; line-height: 1.7; }
+  .agent-tagline { font-size: 13px; color: #8aaa8a; margin-top: 2px; }
+  .agent-meta { text-align: right; font-size: 12px; color: #7a9a7a; font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.5px; line-height: 1.7; }
 
   /* ── Sprite icon ── */
   .agent-icon { width: 48px; height: 48px; border-radius: 50%; overflow: hidden; flex-shrink: 0; background-size: 512px 512px; background-position: -45px -9px; background-repeat: no-repeat; }
@@ -78,35 +78,42 @@
   /* ── Sections ── */
   .card-section { padding: 18px 20px; border-bottom: 1px solid #1a2e1d; }
   .card-section:last-child { border-bottom: none; }
-  .sec-label { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+  .sec-label { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
 
   /* ── Triggers ── */
   .triggers { display: flex; flex-direction: column; gap: 5px; }
-  .trigger { background: #060a07; border: 1px solid #1a2e1d; border-radius: 4px; padding: 7px 12px; font-size: 13px; color: #9fcf85; font-style: italic; }
+  .trigger { background: #060a07; border: 1px solid #1a2e1d; border-radius: 4px; padding: 7px 12px; font-size: 14px; color: #b8e0a0; font-style: italic; }
   .trigger::before { content: '"'; color: #3b6d11; }
   .trigger::after  { content: '"'; color: #3b6d11; }
 
   /* ── When list ── */
   .when-list { list-style: none; display: flex; flex-direction: column; gap: 5px; }
-  .when-list li { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: #9fcf85; line-height: 1.5; }
+  .when-list li { display: flex; align-items: flex-start; gap: 8px; font-size: 14px; color: #b8e0a0; line-height: 1.5; }
   .when-dot { width: 6px; height: 6px; border-radius: 50%; margin-top: 6px; flex-shrink: 0; }
 
   /* ── Curl commands ── */
   .cmd-block { background: #060a07; border: 1px solid #1a2e1d; border-radius: 4px; padding: 10px 12px; margin-bottom: 8px; }
   .cmd-block:last-child { margin-bottom: 0; }
-  .cmd-label { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #4a6b4d; margin-bottom: 5px; }
-  .cmd-code { font-family: 'Courier New', monospace; font-size: 11px; color: #6ed430; white-space: pre-wrap; word-break: break-all; line-height: 1.6; }
+  .cmd-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #7a9a7a; margin-bottom: 5px; }
+  .cmd-code { font-family: 'Courier New', monospace; font-size: 13px; color: #6ed430; white-space: pre-wrap; word-break: break-all; line-height: 1.6; }
   .copy-btn { display: inline-block; margin-top: 5px; background: none; border: 1px solid #1a2e1d; border-radius: 3px; color: #4a6b4d; font-family: 'Barlow Condensed', sans-serif; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; padding: 2px 8px; cursor: pointer; transition: color 0.15s, border-color 0.15s; }
   .copy-btn:hover { color: #6ed430; border-color: #3b6d11; }
 
   /* ── Output / system prompt block ── */
-  .prompt-block { background: #060a07; border: 1px solid #1a2e1d; border-radius: 4px; padding: 14px; font-family: 'Courier New', monospace; font-size: 11px; color: #7aab7a; line-height: 1.7; white-space: pre-wrap; max-height: 380px; overflow-y: auto; }
+  .prompt-block { background: #060a07; border: 1px solid #1a2e1d; border-radius: 4px; padding: 14px; font-family: 'Courier New', monospace; font-size: 13px; color: #b0d8a0; line-height: 1.7; white-space: pre-wrap; max-height: 380px; overflow-y: auto; }
   .prompt-block::-webkit-scrollbar { width: 5px; }
   .prompt-block::-webkit-scrollbar-track { background: #060a07; }
   .prompt-block::-webkit-scrollbar-thumb { background: #1a2e1d; border-radius: 3px; }
 
+  /* ── Collapsible governance cards ── */
+  .gov-card .agent-card-header { cursor: pointer; user-select: none; position: relative; }
+  .gov-card .agent-card-header::after { content: '▾'; position: absolute; right: 20px; top: 50%; transform: translateY(-50%); font-size: 18px; color: #4a6b4d; transition: transform 0.2s; }
+  .gov-card.collapsed .agent-card-header::after { transform: translateY(-50%) rotate(-90deg); }
+  .gov-card.collapsed .card-section { display: none; }
+  .gov-card .agent-card-header:hover::after { color: #6ed430; }
+
   /* ── Output format block ── */
-  .output-block { background: #060a07; border: 1px solid #1a2e1d; border-radius: 4px; padding: 12px 14px; font-family: 'Courier New', monospace; font-size: 11px; color: #9fcf85; line-height: 1.8; white-space: pre-wrap; }
+  .output-block { background: #060a07; border: 1px solid #1a2e1d; border-radius: 4px; padding: 12px 14px; font-family: 'Courier New', monospace; font-size: 13px; color: #c8e8b8; line-height: 1.8; white-space: pre-wrap; }
 </style>
 </head>
 <body>
@@ -1323,8 +1330,8 @@ Systematic, rule-governed, owns the structure, nothing lost on Vault's watch.</d
   <div class="panel" id="panel-governance" data-scope="global">
 
     <!-- AGENT OPERATING PROTOCOLS -->
-    <div class="agent-card" style="border-color:#3b6d11; margin-bottom:20px">
-      <div class="agent-card-header" style="background:#0a1a08; border-bottom:1px solid #2a3d2d">
+    <div class="agent-card gov-card collapsed" style="border-color:#3b6d11; margin-bottom:20px">
+      <div class="agent-card-header" style="background:#0a1a08; border-bottom:1px solid #2a3d2d" onclick="toggleGovCard(this)">
         <div style="width:48px;height:48px;border-radius:50%;background:#0a2e14;border:2px solid #3b6d11;display:flex;align-items:center;justify-content:center;flex-shrink:0">
           <span style="font-family:'Bebas Neue',sans-serif;font-size:20px;color:#6ed430">AOP</span>
         </div>
@@ -1560,8 +1567,8 @@ DEC-GLOBAL-011 | 2026-03-19</div>
     </div><!-- /AOP card -->
 
     <!-- JURISDICTION BOUNDARIES -->
-    <div class="agent-card" style="border-color:#6a4a2a">
-      <div class="agent-card-header" style="background:#120e08; border-bottom:1px solid #2a3d2d">
+    <div class="agent-card gov-card collapsed" style="border-color:#6a4a2a; margin-bottom:20px">
+      <div class="agent-card-header" style="background:#120e08; border-bottom:1px solid #2a3d2d" onclick="toggleGovCard(this)">
         <div style="width:48px;height:48px;border-radius:50%;background:#1a1200;border:2px solid #6a4a2a;display:flex;align-items:center;justify-content:center;flex-shrink:0">
           <span style="font-family:'Bebas Neue',sans-serif;font-size:20px;color:#aa7a4a">JB</span>
         </div>
@@ -1609,8 +1616,8 @@ HOTFIX CLOSE PROTOCOL (mandatory 7-step sequence):
     </div><!-- /jurisdiction card -->
 
     <!-- DEC-GLOBAL-009 — AUTO-SYNC GOVERNANCE TO ALLAGENTS -->
-    <div class="agent-card" style="border-color:#3b6d11; margin-bottom:20px">
-      <div class="agent-card-header" style="background:#0a1a08; border-bottom:1px solid #2a3d2d">
+    <div class="agent-card gov-card collapsed" style="border-color:#3b6d11; margin-bottom:20px">
+      <div class="agent-card-header" style="background:#0a1a08; border-bottom:1px solid #2a3d2d" onclick="toggleGovCard(this)">
         <div style="width:48px;height:48px;border-radius:50%;background:#0a2e14;border:2px solid #3b6d11;display:flex;align-items:center;justify-content:center;flex-shrink:0">
           <span style="font-family:'Bebas Neue',sans-serif;font-size:16px;color:#6ed430">009</span>
         </div>
@@ -1654,8 +1661,8 @@ DECISION FILE: decisions\GLOBAL\2026-03-19_decision_auto-sync-governance-allagen
     </div><!-- /dec-009 card -->
 
     <!-- VAULT RETRIEVAL — DECISION FILES -->
-    <div class="agent-card" style="border-color:#7a5a9a; margin-bottom:20px">
-      <div class="agent-card-header" style="background:#0e0a14; border-bottom:1px solid #2a2040">
+    <div class="agent-card gov-card collapsed" style="border-color:#7a5a9a; margin-bottom:20px">
+      <div class="agent-card-header" style="background:#0e0a14; border-bottom:1px solid #2a2040" onclick="toggleGovCard(this)">
         <div style="width:48px;height:48px;border-radius:50%;background:#1a0e2e;border:2px solid #7a5a9a;display:flex;align-items:center;justify-content:center;flex-shrink:0">
           <span style="font-family:'Bebas Neue',sans-serif;font-size:20px;color:#aa8adf">VLT</span>
         </div>
@@ -1700,6 +1707,73 @@ Vault retrieves and returns. This is Vault's standing function.</div>
       </div>
     </div><!-- /vault retrieval card -->
 
+    <!-- DEC-GLOBAL-010 — NEW AGENT ONBOARDING PROTOCOL -->
+    <div class="agent-card gov-card collapsed" style="border-color:#3b9a6d; margin-bottom:20px">
+      <div class="agent-card-header" style="background:#081a12; border-bottom:1px solid #2a3d2d" onclick="toggleGovCard(this)">
+        <div style="width:48px;height:48px;border-radius:50%;background:#0a2e1a;border:2px solid #3b9a6d;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+          <span style="font-family:'Bebas Neue',sans-serif;font-size:16px;color:#6ed430">010</span>
+        </div>
+        <div>
+          <div class="agent-name">DEC-GLOBAL-010 — Agent Onboarding Protocol</div>
+          <div class="agent-tagline">17 standard fields — Nova fills derivable, prompts Chris for gaps, holds as DRAFT until resolved</div>
+        </div>
+        <div class="agent-scope-badge global">Global</div>
+        <div class="agent-meta">
+          <div>Confirmed: 2026-03-19</div>
+          <div>Owner: Scout (scopes) + Nova (executes)</div>
+          <div>Status: ACTIVE</div>
+        </div>
+      </div>
+      <div class="card-section">
+        <div class="sec-label" style="color:#3b9a6d">Standard Fields (17)</div>
+        <div class="prompt-block"> #  Field                          Nova-derivable?
+ 1  Sprite name                    Yes (from AGENT_ROSTER)
+ 2  Role title                     Yes (from JD)
+ 3  Tagline                        Yes (drafts from JD)
+ 4  Scope badge (Global/Project)   Yes (from AGENT_ROSTER)
+ 5  Accent / border color          NO — Chris provides
+ 6  Header background tint         Yes (derived from #5)
+ 7  Sprite (meta line)             Yes (same as #1)
+ 8  Model                          Yes (from agent file)
+ 9  Reports to / Peer to / Memory  Yes (from roster + JD)
+10  Pronouns                       Conditional (from JD if declared)
+11  Pronoun rationale quote        NO — Nova drafts, Chris confirms
+12  Trigger phrases (3-7)          Partial — Nova drafts, Chris reviews
+13  When to trigger section        Yes (drafts from JD)
+14  Miniverse heartbeat command    Partial — identifier must be confirmed
+15  Miniverse speak bubble command Partial
+16  System prompt summary          Yes (from canonical JD)
+17  Walk sprite image              NO — Chris provides or designates placeholder
+
+Hard blockers on every new agent: #5 (color) and #17 (sprite).</div>
+      </div>
+      <div class="card-section">
+        <div class="sec-label" style="color:#3b9a6d">Onboarding Flow</div>
+        <div class="prompt-block">1. JD approved and filed to _org\roster\ (Scout confirms)
+2. Nova fills all derivable fields from JD + roster + CLAUDE.md + agent file
+3. Nova surfaces gap list — tab held as DRAFT
+4. Chris resolves each gap
+5. Nova files the tab entry (panel HTML + tab button + CSS)
+6. [PUSH CHECK] — PROTO-GLOBAL-006 three-tier sync applies</div>
+      </div>
+      <div class="card-section">
+        <div class="sec-label" style="color:#3b9a6d">Nova's Prompt Template</div>
+        <div class="prompt-block">NEW AGENT ONBOARDING — [Agent Name] ([sprite name])
+Filled: [N] of 17 required fields
+Missing:
+  1. [field] — [why Nova can't derive it]
+Drafted (needs Chris review):
+  - [field]: "[candidate text]"
+Tab is held as DRAFT until all gaps are resolved.
+Resolve these before the tab is filed?</div>
+      </div>
+      <div class="card-section">
+        <div class="prompt-block" style="color:#7a9a7a;font-size:12px">SPEC FILE: _org\specs\allagents\2026-03-19_spec_dec-global-010-allagents-onboarding-protocol.txt
+PROTO-GLOBAL-006 three-tier sync governs the push sequence for onboarding.
+Governance panel is carved out — not treated as an onboarding event.</div>
+      </div>
+    </div><!-- /dec-010 card -->
+
   </div><!-- /panel-governance -->
 
 </div><!-- /content -->
@@ -1732,6 +1806,11 @@ function copy(id, btn) {
     btn.style.color = '#6ed430';
     setTimeout(() => { btn.textContent = orig; btn.style.color = ''; }, 1500);
   });
+}
+
+function toggleGovCard(headerEl) {
+  const card = headerEl.closest('.gov-card');
+  card.classList.toggle('collapsed');
 }
 
 // Activate first tab on load
