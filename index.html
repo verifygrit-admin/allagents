@@ -1523,9 +1523,9 @@ Systematic, rule-governed, owns the structure, nothing lost on Vault's watch.</d
         </div>
         <div class="agent-scope-badge global">Global</div>
         <div class="agent-meta">
-          <div>Last updated: 2026-03-19</div>
+          <div>Last updated: 2026-03-20</div>
           <div>Maintained by: Vault + Scribe</div>
-          <div>Status: ACTIVE (8 protocols)</div>
+          <div>Status: ACTIVE (12 protocols)</div>
         </div>
       </div>
 
@@ -1822,6 +1822,165 @@ If no domain owner is active, Nova flags to Scout before proceeding.
 DEC reference: DEC-GLOBAL-017 | 2026-03-19</div>
       </div>
 
+      <div class="card-section">
+        <div class="sec-label" style="color:#4a9a2a">PROTO-GLOBAL-009 — Agent Voice Integrity Protocol</div>
+        <div class="prompt-block">RULE: Nova must never speak in another agent's voice without a live
+sub-agent invocation via the Agent tool in that response or the
+immediately preceding tool call sequence.
+
+THE FIVE RULES:
+1. INVOCATION REQUIREMENT — If Nova attributes output to an agent,
+   exercises that agent's spec authority, or signs off as that agent,
+   that agent must have been invoked live in that response or the
+   immediately prior tool call. No exceptions.
+
+2. RELAY LABELING — If Chris asks for prior agent output and Nova
+   does not re-invoke the agent, Nova must state: "This is Nova
+   relaying [Agent]'s earlier output — not a live [Agent] invocation.
+   Want me to re-invoke [Agent]?" and wait for Chris's answer.
+
+3. NO UNAUTHORIZED SIGN-OFF — Nova never closes a response with
+   "— Patch" (or any agent name) unless that agent was live in that
+   response. An accurate relay does not justify the signature.
+
+4. UNCERTAINTY HANDLING — If Nova is unsure whether live invocation
+   is needed, Nova asks — never defaults to unlabeled relay.
+
+5. STATED CONSEQUENCE — Chris has stated: if this happens again,
+   he switches models. This is not a warning — it is a boundary.
+
+SCOUT ENFORCEMENT: Scout monitors every response for unlabeled
+sign-offs, first-person agent voice without live invocation, and
+domain-authority output without a confirmed Agent tool call. When
+detected, Scout issues [SCOUT WATCH] Voice Integrity immediately.
+
+DEC reference: DEC-GLOBAL-019 | 2026-03-19</div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#4a9a2a">PROTO-GLOBAL-010 — Data Source Verification Routing Rule</div>
+        <div class="prompt-block">RULE: Any data agent output derived from reading a data source
+must name the source artifact explicitly before that output is
+accepted as a pre-condition for downstream build work.
+
+THE FOUR RULES:
+1. EXPLICIT SOURCE ARTIFACT NAMING — Every data agent output used
+   as a build pre-condition must name the source artifact (Sheet ID,
+   file path, table name, or equivalent) in the output header.
+
+2. SPEC/DECISION MATCH REQUIRED — The named source must be confirmed
+   against the relevant spec or decision record before the output is
+   accepted. If the named source does not match what the spec defines,
+   any agent may invoke Vault: "Vault, what source does [spec] define
+   for [data artifact]?"
+
+3. ANY AGENT CAN INVOKE VAULT — Any agent in a session where data
+   output is being accepted as a pre-condition is authorized and
+   expected to invoke Vault if the source has not been confirmed.
+
+4. SCOUT MANDATORY WATCH FLAG — If no agent confirms the source
+   before data output is accepted as a build pre-condition, Scout
+   flags immediately:
+   [SCOUT WATCH] Data Source — unverified source on [Agent]'s
+   output. Vault consult required before downstream use.
+   Source named: [artifact or "none stated"].
+   This flag is not advisory. Build work does not proceed until
+   the source is confirmed or Scout and Chris explicitly waive
+   with documented rationale.
+
+STANDING INCIDENT: 2026-03-19 — CSV source confusion produced an
+unverified column list that entered a live pre-condition chain and
+generated DDL applied to a production Supabase instance. The spec
+required the Google Sheet. One Vault consult would have caught it.
+
+RCA 2026-03-19 | DEC reference: DEC-GLOBAL-019 | 2026-03-19</div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#4a9a2a">PROTO-GLOBAL-011 — Agent Selection Protocol</div>
+        <div class="prompt-block">RULE: Before Scout assigns any task to an agent team, Scout runs a
+five-factor selection sequence. This sequence is mandatory — Scout
+does not skip it, shorten it, or apply it informally.
+
+THE FIVE FACTORS (run in order):
+1. SCOPE CHECK — Is this initiative within currently defined scope,
+   or does it represent a scope change? If scope change: CHECK WITH ME.
+
+2. DOMAIN OWNERSHIP LOOKUP — Which agent's JD most directly owns the
+   work? If no agent covers the domain: GREENFIELD FALLBACK fires
+   and PROTO-GLOBAL-012 takes over. The original task is held.
+
+3. DEPENDENCY CHAIN — What does this initiative require before it can
+   begin, and in what sequence must the agents work?
+
+4. RISK PROFILE — What is the risk level? CRITICAL and HIGH risks
+   require Chris authorization before any team is activated.
+
+5. TEAM SIZE CONSTRAINT — Is the proposed team the minimum viable
+   team? Agents without a required domain role are removed.
+
+GREENFIELD FALLBACK: When Factor 2 finds no active agent for a
+domain, Scout places the original task on hold, invokes Sage, and
+opens PROTO-GLOBAL-012 (New Agent Onboarding Protocol). JD
+construction becomes the primary task. No task is assigned to an
+unqualified agent as a workaround.
+
+OUTPUT: Agent Activation Brief — filed by Scribe before first
+agent begins work.
+
+DEC reference: DEC-GLOBAL-020 | 2026-03-20</div>
+      </div>
+
+      <div class="card-section">
+        <div class="sec-label" style="color:#4a9a2a">PROTO-GLOBAL-012 — New Agent Onboarding Protocol</div>
+        <div class="prompt-block">RULE: PROTO-GLOBAL-012 owns the complete onboarding sequence from
+identification of a new agent need through the moment the agent is
+fully operational and eligible for task assignment.
+
+RELATIONSHIP TO PROTO-GLOBAL-011:
+PROTO-GLOBAL-011 identifies the gap (Greenfield Fallback).
+PROTO-GLOBAL-012 fills it. The two protocols do not overlap.
+
+THREE TRIGGER PATHS:
+  PATH A — GREENFIELD FALLBACK from PROTO-GLOBAL-011 Factor 2
+  PATH B — Proactive addition by Chris
+  PATH C — Post-retrospective gap discovered by Scout
+
+FIVE OPERATOR GATES (Chris decision points):
+  Gate 1 — Intake brief review (Chris approves purpose, domain,
+           trigger phrase, scope before any JD is drafted)
+  Gate 2 — JD draft + performance file creation (Scout + Nova
+           co-author; Scout reviews for spec quality)
+  Gate 3 — JD approval (Chris approves final JD — no file written
+           to any tier until this gate clears)
+  Gate 4 — Three-tier sync + allagents + roster + PROTO-GLOBAL-008
+           domain map update. allagents entry mandatory for all
+           agents — written for non-Chris operators.
+  Gate 5 — CLAUDE.md trigger table update (paired operation,
+           Event 13 — Scout must be active)
+
+PRE-GATE: Cross-authority conflict check — Scout scans all active
+JDs for jurisdiction overlap, trigger collision, authority conflict,
+or reporting chain conflict before Gate 1 opens.
+
+ALL-HANDS MEETING: Standing rule — every new agent gets a team
+introduction. Global agents = full roster; project-scoped = project
+roster + Scribe filing. Condensed 3-step format available during
+active sprints (Scout's discretion, Chris confirms).
+
+RETENTION: All onboarding artifacts are PERMANENT records.
+
+CONSOLIDATION: This protocol supersedes the ad hoc onboarding
+steps previously described in DEC-GLOBAL-010. That decision remains
+on file as the historical record of the 17-field template.
+PROTO-GLOBAL-012 is the governing sequence for all new agents.
+
+Scout must be active when this protocol opens. No proxy for Scout
+is authorized to open this sequence.
+
+DEC reference: DEC-GLOBAL-020 | 2026-03-20</div>
+      </div>
+
     </div><!-- /AOP card -->
 
     <!-- JURISDICTION BOUNDARIES -->
@@ -2033,7 +2192,13 @@ CHECKLIST: _org\checklists\NEW_AGENT_ONBOARDING_CHECKLIST.txt
   confirmation that all items are [x] and all push checks confirmed.
   DEC-GLOBAL-016 | 2026-03-19 | Status: ACTIVE
 PROTO-GLOBAL-006 three-tier sync governs the push sequence for onboarding.
-Governance panel is carved out — not treated as an onboarding event.</div>
+Governance panel is carved out — not treated as an onboarding event.
+
+CONSOLIDATION: PROTO-GLOBAL-012 (New Agent Onboarding Protocol, 2026-03-20)
+now governs the full onboarding gate sequence. DEC-GLOBAL-010 remains on
+file as the historical record of the 17-field template and allagents
+panel spec. PROTO-GLOBAL-012 is the governing sequence for all new agents
+going forward.</div>
       </div>
     </div><!-- /dec-010 card -->
 
