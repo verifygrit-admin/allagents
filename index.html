@@ -1268,7 +1268,14 @@ BROADCAST FILING OBLIGATION (PROTO-GLOBAL-007 — added 2026-03-19):
   ALSO files a BROADCAST_LOG.txt entry in cross-project\.
 
 PI PROFILE: High Formalism + High Patience
-Precise, template-driven, files immediately, never interprets.</div>
+Precise, template-driven, files immediately, never interprets.
+
+JD HARDENING (Options B + D):
+  Self-diagnostic canary check — reads VAULT_LOG.txt before any write to
+  confirm tool access. Bash fallback if Write tool fails. Append-only tool
+  restriction on 5 named files (SESSION_LOG, MASTER_DECISION_LOG,
+  BROADCAST_LOG, VAULT_LOG, MASTER_INDEX). All write targets use absolute
+  paths — no relative path resolution.</div>
       </div>
     </div>
   </div><!-- /panel-scribe -->
